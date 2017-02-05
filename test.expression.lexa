@@ -1,0 +1,435 @@
+# This test file should include a test for every branch of the expression evaluator.
+# There is no requirement to test null values or exceptions.
+# The format is:
+#   [stopOnError ? <stop>]
+#   [silent ? <run silent>]
+#   [testList - <list of tests>]
+#   [function {
+#     <global functions>
+#   }]
+#   [data {
+#     <global data>
+#   }]
+#   test {
+#     <name> {
+#       expression - <expression>
+#       expected <expected result>
+#       [data {
+#         <test data>
+#       }]
+#       [function {
+#         <test functions>
+#       }]
+#     }
+#     [...]
+#   }
+# 
+# Where:
+# <stop>			indicate if the run should stop on error; defaults to false.
+# <run silent>       indicate if output is suppressed when the expected results are returned; defaults to true.
+# <list of tests>    a space separated list of tests to perform; defaults to all the tests listed.
+# <global functions> a set of functions available to all the tests.
+# <global data>      data to be used by all the tests.
+# <name>             the name for a test.
+# <expression>       an expression to test.
+# <expected result>  the expected result of the test.
+# <test functions>   a set of functions for this test.
+# <test data>        data to be used by this test.
+
+stopOnError ? true
+silent ? false
+#testList - functionComposite
+
+# a block containing any functions to be loaded.
+function {
+    simple {
+        arguments - a b
+        expression - a + b
+		description - add the parameters
+    }
+    greatest {
+		description - find the grater of three values
+        arguments - first second third
+        strict ? true
+        expression "
+            max = ((first > second) ?
+                first : second);
+            max = ((max > third) ?
+                max : third);
+            max
+        "
+    }
+}
+
+# data block that can be overridden in each individual test.
+data {
+	no - data
+}
+
+test {
+	addInteger {
+		expression - 19 + 42
+		expected % 61
+	}
+
+	addDouble {
+		expression - 0.45 + 2.67
+		expected $ 3.12
+	}
+
+	assign {
+		expression - name = "assign"
+		expected - assign
+	}
+
+	lessThanWhenLess {
+		expression - 5 < 6
+		expected ? true
+	}
+
+	lessThanWhenEqual {
+		expression - 5 < 5
+		expected ? false
+	}
+
+	lessThanWhenGreater {
+		expression - 6 < 5
+		expected ? false
+	}
+
+	lessThanOrEqualWhenLess {
+		expression - 5 <= 6
+		expected ? true
+	}
+
+	lessThanOrEqualWhenEqual {
+		expression - 5 <= 5
+		expected ? true
+	}
+
+	lessThanOrEqualWhenGreater {
+		expression - 6 <= 5
+		expected ? false
+	}
+
+	equalWhenLess {
+		expression - 5 == 6
+		expected ? false
+	}
+
+	equalWhenEqual {
+		expression - 5 == 5
+		expected ? true
+	}
+
+	equalWhenGreater {
+		expression - 6 == 5
+		expected ? false
+	}
+
+	greaterThanOrEqualWhenLess {
+		expression - 5 >= 6
+		expected ? false
+	}
+
+	greaterThanOrEqualWhenEqual {
+		expression - 5 >= 5
+		expected ? true
+	}
+
+	greaterThanOrEqualWhenGreater {
+		expression - 6 >= 5
+		expected ? true
+	}
+
+	greaterThanWhenLess {
+		expression - 5 > 6
+		expected ? false
+}
+
+	greaterThanWhenEqual {
+		expression - 5 > 5
+		expected ? false
+	}
+
+	greaterThanWhenGreater {
+		expression - 6 > 5
+		expected ? true
+	}
+
+	conditionTrue {
+		expression - true ? "Y" : "N"
+		expected - Y
+	}
+
+	conditionFalse {
+		expression - false ? "Y" : "N"
+		expected - N
+	}
+
+	divideInteger {
+		expression - 12 / 3
+		expected % 4
+		data {
+			no - data
+		}
+	}
+
+	divideDouble {
+		expression - 20.0 / 8.0
+		expected $ 2.5
+		data {
+			no - data
+		}
+	}
+
+	elementString {
+		expression - "a string of data"
+		expected - a string of data
+	}
+
+	elementBooleanTrue {
+		expression - true
+		expected ? true
+	}
+
+	elementBooleanFalse {
+		expression - false
+		expected ? false
+	}
+
+	elementDate {
+		expression - '2013/08/15'
+		expected @ 2013/08/15
+	}
+
+	elementDouble {
+		expression - 3.14
+		expected $ 3.14
+	}
+
+	elementInteger {
+		expression - 42
+		expected % 42
+	}
+
+	elementLiteral {
+		expression - seven
+		expected - eleven
+		data {
+			seven - eleven
+		}
+	}
+
+    elementValue {
+        data {
+            key - second
+            first - 1st
+            second - 2nd
+            third - 3rd
+        }
+		expression - @key
+		expected - 2nd
+    }
+
+	andTrueTrue {
+		expression - true && true
+		expected ? true
+	}
+
+	andTrueFalse {
+		expression - true && false
+		expected ? false
+	}
+
+	andFalseTrue {
+		expression - false && true
+		expected ? false
+	}
+
+	andFalseFalse {
+		expression - false && false
+		expected ? false
+	}
+
+	orTrueTrue {
+		expression - true || true
+		expected ? true
+	}
+
+	orTrueFalse {
+		expression - true || false
+		expected ? true
+	}
+
+	orFalseTrue {
+		expression - false || true
+		expected ? true
+	}
+
+	orFalseFalse {
+		expression - false || false
+		expected ? false
+	}
+
+	modulusInteger {
+		expression - 14 % 11
+		expected % 3
+	}
+
+	modulusDouble {
+		expression - 10.4 % 5.3
+		# wee bit of rounding !!
+		expected $ 5.1000000000000005
+	}
+
+	multiplyInteger {
+		expression - 3*4
+		expected % 12
+	}
+
+	multiplyDouble {
+		expression - 3.14 * 2.8
+		# check for rounding !!
+		expected $ 8.792
+	}
+
+	negativeInteger {
+		expression - -17
+		expected % -17
+	}
+
+	negativeDouble {
+		expression - -3.14
+		# check for rounding !!
+		expected $ -3.14
+	}
+
+	notTrue {
+		expression - !true
+		expected ? false
+	}
+
+	notFalse {
+		expression - !false
+		expected ? true
+	}
+
+	powerInteger {
+		expression - 3 ^ 2
+		expected % 9
+	}
+
+	powerDouble {
+		expression - 2.0 ^ 4.0
+		# check for rounding !!
+		expected $ 16.0
+	}
+
+	subtractInteger {
+		expression - 10 - 7
+		expected % 3
+	}
+
+	subtractDouble {
+		expression - 12.4 - 8.6
+		# check for rounding !!
+		expected $ 3.8000000000000007
+	}
+
+	complex {
+		# evaluates them all and returns the final item; i.e the DataSet result.
+		expression "
+			result.a = 14;
+			result.b = 10.5;
+			result.c = false;
+			result
+		"
+
+		# the equals method should work irrespective of order.
+		expected {
+			c ? false
+			a % 14
+			b $ 10.5
+		}
+	}
+
+	functionNull {
+		expression - [null]
+	}
+
+	functionPi {
+		expression - [math.pi]
+		# watch the rounding:
+		expected $ 3.141592653589793
+	}
+	functionSimple {
+		expression - [simple 5 6]
+		expected % 11
+	}
+
+	functionGreatest {
+		expression - [greatest 7 11 10]
+		expected % 11
+	}
+
+    functionComposite {
+		function {
+            composite {
+				description - combine two calls to greatest
+				arguments - a b c d
+				expression "
+					temp = [greatest a b c];
+					[greatest temp d 0]
+				"
+		    }
+        }
+		expression - [composite 7 11 10 12]
+		expected % 12
+    }
+    functionMax {
+		function {
+ 		  #max {
+		  #  arguments - ~
+		  #  expression "
+		#	  [isNull ~1] ?
+        #        ~0 :
+        #        (
+	#			  data = [data.clone ~];
+	#			  [data.remove data "~0"];
+        #          max = [max data];
+         #         ~0 > max ?
+		#		    ~0 :
+		#		    max
+		#	    )
+		#    "
+		#  }
+          maxInSet {
+			description - find the maximum value in the set
+            arguments - set
+            expression "
+              
+              v0 = [data.value set 0];
+              ([data.size set] == 1) ?
+                v0 :
+                (
+                  data = [data.clone set];
+                  [data.remove data [data.key data 0]];
+                  max = [maxInSet data];
+                  (v0 > max) ?
+                    v0 :
+                    max
+                )
+            "
+          }
+          max {
+            arguments - ~
+            expression "
+              [maxInSet ~]
+            "
+          }
+        }
+		expression - [max 1 3 2 27 17 2 14]
+		expected % 27
+    }
+}

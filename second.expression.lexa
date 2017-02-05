@@ -1,0 +1,25 @@
+# use this to test the pick up of different test files;
+
+test - area circumference algebra
+
+area {
+    expression - area = (pi * radius ^ 2.0)
+    data {
+        pi $ 3.14
+        radius $ 5.0
+    }
+}
+
+circumference {
+    expression - circumference = (2.0 * pi * radius)
+    data {
+        pi $ 3.14
+        radius $ 5.0
+    }
+}
+
+algebra {
+    expression - (5 + 2) ^ 3 * 7 * (8+3)
+    data {
+    }
+}

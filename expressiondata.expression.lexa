@@ -1,0 +1,46 @@
+# Test the classes ExpressionMap and ExpressionData
+# the first block 'map' defines a data map that will be created.
+
+# test - pension
+map {
+  acrual {
+	annualIncreasePercentage - 2.5
+	yearsToRetirement - (retirementAge > ageNow) ? (retirementAge - ageNow) : 0.0
+	fullService - retirementAge - ageJoined
+	service - (fullService > 40.0) ? 40.0 : fullService
+	increase - ((100.0 + annualIncreasePercentage) / 100.0) ^ yearsToRetirement
+	incomeAtRetirement - currentIncome * increase
+	pension - incomeAtRetirement * service / 60.0
+  }
+}
+
+function {
+  test.pension {
+	arguments - d
+	expression "
+	  [string.format "Your pension at retirement age $0 will be $1 based on $2 years service."
+		d.retirementAge d.pension d.fullService]
+	"
+  }
+}
+
+data {
+  bob {
+	ageJoined - 30.0
+	ageNow - 46.0
+	retirementAge - 65.0
+	currentIncome - 50000.0
+  }
+  jon {
+	ageJoined - 20.0
+	ageNow - 50.0
+	retirementAge - 60.0
+	currentIncome - 40000.0
+  }
+}
+test {
+  pension {
+	expression - [test.pension bob]
+	expected - Your pension at retirement age 65 will be 10000 based on 40 years service.
+  }
+}

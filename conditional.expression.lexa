@@ -1,0 +1,39 @@
+# list all the tests you wish to perform here:
+# each test is in its own block with to parameters, expression and data.
+test - true false multi
+
+true {
+    expression - boolValue ? "Yes sir!" : "No way."
+    data {
+        boolValue ? TRUE
+    }
+}
+
+false {
+    expression - boolValue ? "Yes sir!" : "No way."
+    data {
+        boolValue ? FALSE
+    }
+}
+
+multi {
+    expression "
+    (A && B || B && C) ?
+        ""Good shot!"" :
+        (A ?
+            ""A true"" :
+            (B ?
+                ""B true"" :
+                (C ?
+                    ""C true"" :
+                    ""All false""
+                )
+            )
+        )
+    "
+    data {
+        A ? FALSE
+        B ? FALSE
+        C ? TRUE
+    }
+}

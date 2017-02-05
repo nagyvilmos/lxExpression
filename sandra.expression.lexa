@@ -1,0 +1,37 @@
+silent ? false
+function {
+   doNothing {
+     arguments - arg
+     expression "
+       arg
+     "
+   }
+}
+
+.data {
+  no - data
+}
+
+test {
+	complexSum {
+		data {
+		  first % 2
+		  second % 3
+		  third % 5
+		  fourth % 5
+		}
+		expression "
+          (first * second) + (third * fourth)
+        "
+		expected % 31
+	}
+    doNothing {
+        data {
+            test - test
+        }
+		expression "
+          [doNothing test]
+        "
+		expected - test
+    }
+}

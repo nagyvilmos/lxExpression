@@ -1,0 +1,25 @@
+silent ? false
+map {
+	annualIncreasePercentage - 2.5
+	yearsToRetirement - (retirementAge > ageNow) ? (retirementAge - ageNow) : 0.0
+	fullService - retirementAge - ageJoined
+	service - (fullService > 40.0) ? 40.0 : fullService
+	increase - ((100.0 + annualIncreasePercentage) / 100.0) ^ yearsToRetirement
+	incomeAtRetirement - currentIncome * increase
+	pension - incomeAtRetirement * service / 60.0
+}
+data {
+  ageJoined $ 20.0
+  ageNow $ 50.0
+  retirementAge $ 65.0
+  currentIncome $ 40000.0
+}
+test {
+  pension {
+	expression "
+	  [string.format "Your pension at retirement age %1.0f will be %1.0f based on %1.0f years service."
+		retirementAge pension fullService]
+	"
+	expected - Your pension at retirement age 65 will be 38621 based on 45 years service.
+  }
+}
