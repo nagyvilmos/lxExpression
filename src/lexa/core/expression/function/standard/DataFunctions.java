@@ -40,7 +40,7 @@ public class DataFunctions
 	}
 
 	/**
-	A function to call {@link DataSet#clone() clone} method on a {@link DataSet}
+	A function to clone a {@link DataSet}.
 	<p>This is called using:
 	<pre>[data.clone name]</pre>
 	@return the clone function
@@ -65,10 +65,10 @@ public class DataFunctions
 	}
 
 	/**
-	A function to call {@link DataSet#contains() clone} method on a {@link DataSet}
+	A function to find if a dataset contains a key
 	<p>This is called using:
-	<pre>[data.clone name]</pre>
-	@return the clone function
+	<pre>[data.clone name key]</pre>
+	@return {@code true} if the item exists.
 	*/
 	private static Function contains()
 	{

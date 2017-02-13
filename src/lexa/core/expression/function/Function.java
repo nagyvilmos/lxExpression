@@ -22,7 +22,7 @@ import lexa.core.expression.ExpressionException;
 
 /**
  * Base class for a function to be used by the expressions engine.
- * <p> Link {@see lexa.core.expression.function.standard}
+ * <p> Link {@link lexa.core.expression.function.standard}
  * @author William
  * @since 2013-09
  */
@@ -190,7 +190,11 @@ public abstract class Function {
 		return this.format;
 	}
 
-	public String help()
+    /**
+     *
+     * @return
+     */
+    public String help()
 	{
 		return this.format() + '\n' + this.describe();
 	}

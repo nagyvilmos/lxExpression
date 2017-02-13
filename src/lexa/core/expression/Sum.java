@@ -57,7 +57,7 @@ public class Sum
     }
 
     /**
-     * Calculate the difference of two {@see Double} numbers.
+     * Calculate the difference of two {@link Double} numbers.
      * @param lhs the left hand side of the expression.
      * @param rhs the right hand side of the expression.
      * @return the difference of the two numbers.
@@ -68,7 +68,7 @@ public class Sum
     }
 
     /**
-     * Calculate the difference of two {@see Integer} numbers.
+     * Calculate the difference of two {@link Integer} numbers.
      * @param lhs the left hand side of the expression.
      * @param rhs the right hand side of the expression.
      * @return the difference of the two numbers.

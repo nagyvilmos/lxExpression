@@ -19,19 +19,19 @@
  */
 /**
  * Provides the classes for expression evaluation.
- * <p>Expressions are normally built using the {@link lexa.core.expression.ExpressionParser} that
- * takes a {@see java.lang.String} and converts it to a block of expressions.
+ * <p>Expressions are built using the {@link lexa.core.expression.Expression#parse Expression.parse} function
+ * that takes a {@link java.lang.String} and converts it to a block of expressions.
  * When evaluating an expression, an optional {@link lexa.core.data.DataSet} is used to provide
  * the data for any calculations.
  * <p>An example usage of the parser would be:
  * <pre>
- * Expression ex = Expression.parse("id &gt;= 20 && id &lt;= 30"); // get id's between 20 and 30 inclusive.
+ * Expression ex = Expression.parse("id &gt;= 20 &amp;&amp; id &lt;= 30"); // get id's between 20 and 30 inclusive.
  * DataSet data = new DataSet();
  * data.put("id", 33);
  * system.out.println(ex.evaluate(data)); // returns false</pre>
  * 
  * <p>Expressions strings describe the expression to be built.  As the expression is parameterised with a
- * {@see lexa.core.data.DataSet} it can be used multiple times and provide different results depending
+ * {@link lexa.core.data.DataSet} it can be used multiple times and provide different results depending
  * on the input data.
  * <p>The format for a valid expression is:
  * <pre>
@@ -40,7 +40,7 @@
  *                  | LOGICAL_OR
  * LOGICAL_OR     ::= LOGICAL_AND "||" LOGICAL_OR
  *                  | LOGICAL_AND
- * LOGICAL_AND    ::= COMPARE "&&" LOGICAL_AND
+ * LOGICAL_AND    ::= COMPARE "&amp;&amp;" LOGICAL_AND
  *                  | COMPARE
  * COMPARE        ::= SUM "&lt;" SUM
  *                  | SUM "&lt;=" SUM
@@ -79,7 +79,6 @@
  * 
  * <p><b>TO DO</b>
  * <ul>
- * <li><strike>Dates do not work properly.</strike></li>
  * <li>Looping of some form</li>
  * </ul>
  *

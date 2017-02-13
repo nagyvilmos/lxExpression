@@ -172,7 +172,12 @@ public class ExTest
         }
 		return okay;
     }
-   public static void main(String ... args) {
+
+    /**
+     *
+     * @param args
+     */
+    public static void main(String ... args) {
         DataSet file = null;
         try {
             String fileName = "test.expression.lexa";

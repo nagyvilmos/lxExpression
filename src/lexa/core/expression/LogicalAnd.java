@@ -18,7 +18,7 @@ package lexa.core.expression;
 
 /**
  * Perform a logical AND on the results from the expressions.
- * <p>Each expression must return results of type {@see Boolean}.
+ * <p>Each expression must return results of type {@link Boolean}.
  * <p>If any result is {@code null}, the return will be {@code null}, otherwise it will be
  * {@code true} or {@code false} depending on the result.
  * <p>If any expression returns {@code null} or {@code false}, then no further expressions are evaluated.
@@ -43,7 +43,6 @@ class LogicalAnd
      * Create a logical AND object.
      * @param lhs the left hand side of the expression
      * @param rhs the right hand side of the expression
-     * @throws ExpressionException when an error occurs in creating the logical AND
      */
     LogicalAnd(Expression lhs, Expression rhs) {
         super(LogicalAnd.class, lhs, rhs);
@@ -52,7 +51,7 @@ class LogicalAnd
     /**
      * Checks if the result of an evaluation is valid.
      * <br>
-     * The result is valid if it is not {@code null} and can be caste to a {@see Boolean}.
+     * The result is valid if it is not {@code null} and can be caste to a {@link Boolean}.
      * @param result the result from an evaluated expression.
      * @return {@code true} if the result is valid.
      * @throws ExpressionException when an error occurs in validating the result.
@@ -69,7 +68,6 @@ class LogicalAnd
      * Once the overall result is {@code false} then processing is complete.
      * @param overall the existing result from the previously evaluated expressions.
      * @return {@code true} if the result is set to {@code false}.
-     * @throws ExpressionException when an error occurs in checking the result.
      */
     @Override
     protected boolean complete(Object overall) {

@@ -5,7 +5,7 @@
 /**
  * This provides inbuilt functions for the Lexa Expression Parser.
  * <p>These are added to the {@link lexa.core.expression.function.FunctionLibrary function library}
- * and are available to all {@link lexa.core.expression.Expresion expressions}.
+ * and are available to all {@link lexa.core.expression.Expression expressions}.
 <p>The functions supported are grouped by type:
 <dl>
 <dt>{@link lexa.core.expression.function.standard.DataFunctions DataFunctions}</dt>

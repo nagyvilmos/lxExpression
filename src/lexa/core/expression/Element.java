@@ -20,7 +20,7 @@ import lexa.core.data.DataSet;
 /**
  * Represent an expression as a single element<br>
  * An element can either be a literal value or an ID to a {see DataItem} to
- * look up in the {@see DataSet} during evaluation.
+ * look up in the {@link DataSet} during evaluation.
  * @author William
  * @since 2013-03
  */
@@ -110,7 +110,7 @@ public class Element
     }
 
     /**
-     * Retrieve an item from a {@see DataSet}.
+     * Retrieve an item from a {@link DataSet}.
      * <br>
      * This method allows the tree to be walked by using a dot notation to
      * drill down through the tree.
@@ -127,7 +127,7 @@ public class Element
             }
             return Element.dataSetValue(key.substring(index+1),sub);
         }
-        return data.getValue(key);
+        return data.getObject(key);
     }
 
     /**

@@ -80,7 +80,7 @@ public enum WordType {
     private final String value;
 
     /**
-     * Constructor for a {@see WordType}
+     * Constructor for a {@link WordType}
      * @param value the string value for the enum.
      */
     private WordType(String value) {

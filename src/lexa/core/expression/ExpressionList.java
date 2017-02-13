@@ -39,13 +39,11 @@ public class ExpressionList
 
 	/**
 	 * The result is always valid.
-	 * @param result
-	 * @return
-	 * @throws ExpressionException 
+	 * @param result the result to validated
+	 * @return {@code true}
 	 */
 	@Override
 	protected boolean validate(Object result)
-			throws ExpressionException
 	{
 		return true;
 	}

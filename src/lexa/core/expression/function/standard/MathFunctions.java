@@ -17,7 +17,11 @@ public class MathFunctions
 	{
 	}
 
-	public static Function[] getFunctions()
+    /**
+     *
+     * @return
+     */
+    public static Function[] getFunctions()
 	{
 		Function[] functions =
 		{

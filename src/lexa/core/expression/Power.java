@@ -55,7 +55,7 @@ public class Power
     }
 
     /**
-     * Calculate one {@see Double} number raised to the power of another.
+     * Calculate one {@link Double} number raised to the power of another.
      * @param lhs the left hand side of the expression; base.
      * @param rhs the right hand side of the expression; exponent.
      * @return returns {@code lhs ^ rhs}.
@@ -66,7 +66,7 @@ public class Power
     }
 
     /**
-     * Calculate one {@see Integer} number raised to the power of another.
+     * Calculate one {@link Integer} number raised to the power of another.
      * @param lhs the left hand side of the expression; value.
      * @param rhs the right hand side of the expression; modulo.
      * @return {@code null} if the exponent is less than zero,

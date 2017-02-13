@@ -33,7 +33,7 @@ public class Divide
     }
 
     /**
-     * Calculate the division of two {@see Double} numbers.
+     * Calculate the division of two {@link Double} numbers.
      * @param lhs the left hand side of the expression; numerator.
      * @param rhs the right hand side of the expression; denominator.
      * @return {@code null} if the denominator is zero,
@@ -48,7 +48,7 @@ public class Divide
     }
 
     /**
-     * Calculate the division of two {@see Integer} numbers.
+     * Calculate the division of two {@link Integer} numbers.
      * @param lhs the left hand side of the expression; numerator.
      * @param rhs the right hand side of the expression; denominator.
      * @return {@code null} if the denominator is zero,

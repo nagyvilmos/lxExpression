@@ -16,7 +16,12 @@ public abstract class StaticFunction
 		extends Function
 {
 
-	public StaticFunction(String name, String ... arguments)
+    /**
+     *
+     * @param name
+     * @param arguments
+     */
+    public StaticFunction(String name, String ... arguments)
 	{
 		super(name, arguments);
 	}

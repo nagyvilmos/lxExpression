@@ -14,6 +14,9 @@ import lexa.test.TestClass;
 public class TestMappedData extends TestClass
 {
 
+    /**
+     *
+     */
     public TestMappedData()
     {
     }

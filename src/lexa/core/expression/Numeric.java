@@ -63,7 +63,7 @@ public abstract class Numeric
 
     /**
      * Combines the existing overall result with the new result.
-     * <p> Uses the methods {@see #calcInteger calcInteger} and {@see #calcDouble calcDouble}
+     * <p> Uses the methods {@link #calcInteger calcInteger} and {@link #calcDouble calcDouble}
      * to evaluate the results.
      * @param overall the existing result from the previously evaluated expressions.
      * @param result the result from an evaluated expression.
@@ -84,8 +84,8 @@ public abstract class Numeric
     }
 
     /**
-     * Calculate the result of two {@see Double} numbers.
-     * <p><b>NB</b> This method must be synonymous with {@see #calcInteger calcInteger}
+     * Calculate the result of two {@link Double} numbers.
+     * <p><b>NB</b> This method must be synonymous with {@link #calcInteger calcInteger}
      * @param lhs the left hand side of the expression.
      * @param rhs the right hand side of the expression.
      * @return the result of the calculation.
@@ -93,8 +93,8 @@ public abstract class Numeric
     protected abstract Double calcDouble (Double lhs, Double rhs);
 
     /**
-     * Calculate the result of two {@see Integer} numbers.
-     * <p><b>NB</b> This method must be synonymous with {@see #calcDouble calcDouble}
+     * Calculate the result of two {@link Integer} numbers.
+     * <p><b>NB</b> This method must be synonymous with {@link #calcDouble calcDouble}
      * @param lhs the left hand side of the expression.
      * @param rhs the right hand side of the expression.
      * @return the result of the calculation.

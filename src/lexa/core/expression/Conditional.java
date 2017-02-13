@@ -58,8 +58,8 @@ public class Conditional
 	 * <p>If {@code condition} evaluates as {@code true} then {@code onTrue} is evaluated,
 	 * otherwise then {@code onFalse} is evaluated.
 	 * @param condition condition to evaluate
-	 * @param onTrue
-	 * @param onFalse 
+	 * @param onTrue    expression to evaluate when {@code condition == true} 
+	 * @param onFalse   expression to evaluate when {@code condition == false} 
 	 */
     public Conditional(Expression condition, Expression onTrue, Expression onFalse) {
         this.condition=condition;

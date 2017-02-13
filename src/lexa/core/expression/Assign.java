@@ -21,7 +21,7 @@ import lexa.core.data.SimpleDataSet;
 /**
  * Assign a value within an expression.
  * <br>
- * Assigns the result of an {@see Expression} to a key.
+ * Assigns the result of an {@link Expression} to a key.
  * @author William
  * @since 2013-03
  */
@@ -51,7 +51,7 @@ public class Assign extends Expression {
     /**
      * Create a new assignment expression.
      * @param key the key value to be populated by {@code expression}
-     * @param expression the {@see Expression} to evaluate.
+     * @param expression the {@link Expression} to evaluate.
      * @throws ExpressionException when the {@code key} is not a valid name.
      */
     public Assign(String key, Expression expression)

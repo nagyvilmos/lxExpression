@@ -54,7 +54,7 @@ public class Multiply
     }
 
     /**
-     * Calculate the multiple of two {@see Double} numbers.
+     * Calculate the multiple of two {@link Double} numbers.
      * @param lhs the left hand side of the expression.
      * @param rhs the right hand side of the expression.
      * @return the sum of the two numbers.
@@ -65,7 +65,7 @@ public class Multiply
     }
 
     /**
-     * Calculate the multiple of two {@see Integer} numbers.
+     * Calculate the multiple of two {@link Integer} numbers.
      * @param lhs the left hand side of the expression.
      * @param rhs the right hand side of the expression.
      * @return the sum of the two numbers.

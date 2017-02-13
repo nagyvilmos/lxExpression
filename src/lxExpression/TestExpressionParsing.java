@@ -29,28 +29,41 @@ public class TestExpressionParsing extends TestClass
     private String input;
     private Object result;
 
+    /**
+     *
+     * @return
+     */
     public Object[] expressions()
     {
-        return new Object[]{
-            new Object[]{"1 + 2", 3},
-            new Object[]{"'I have ' + (1+ 3) + ' horses for gin'", "I have 4 horses for gin"},
-            new Object[]{"a * c / b", 6, new SimpleDataSet().put("a",3).put("b",4).put("c",2)}
+        return new TestCase[]{
+            new TestCase("1 + 2", 3, null),
+            new TestCase("[string.format \"I have %1$d horses for gin\" 4]", "I have 4 horses for gin", null),
+            new TestCase("(a * b) / c", 6, new SimpleDataSet().put("a",3).put("b",4).put("c",2))
         };
     }
     
+    /**
+     *
+     * @param arg
+     * @return
+     */
     public Boolean setUpTest(Object arg) 
     {
-        Object[] args = (Object[])arg;
-        this.input = (String)args[0];
+        TestCase testCase = (TestCase)arg;
+        this.input = testCase.expression;
         this.expression = null;
         this.result = null;
-        this.expected = args[1];
-        this.data = args.length>2 ?
-                (DataSet)args[2] :
-                new SimpleDataSet();        
+        this.expected = testCase.result;
+        this.data = testCase.data;        
         return true;
     }
 
+    /**
+     *
+     * @param arg
+     * @return
+     * @throws ExpressionException
+     */
     @TestAnnotation(order = 0, setUp = "setUpTest")
     public Boolean create(Object arg) throws ExpressionException
     {
@@ -58,18 +71,54 @@ public class TestExpressionParsing extends TestClass
         return true;
     }
             
-   @TestAnnotation(order = 10)
+    /**
+     *
+     * @param arg
+     * @return
+     * @throws ExpressionException
+     */
+    @TestAnnotation(order = 10)
     public Boolean evaluate(Object arg) throws ExpressionException
     {
         this.result = this.expression.evaluate(this.data);
         return true;
     }
     
-   @TestAnnotation(order = 20)  
+    /**
+     *
+     * @param arg
+     * @return
+     */
+    @TestAnnotation(order = 20)  
     public Boolean confirm(Object arg)
     {
         if (this.expected == null)
             return (this.result == null);
         return this.expected.equals(this.result);
+    }
+    
+    private class TestCase
+    {
+
+        private final DataSet data;
+
+        private final String expression;
+        private final Object result;
+        
+        TestCase(String expression, Object result, DataSet data)
+        {
+            this.expression = expression;
+            this.result = result;
+            this.data = (data != null) ? data :
+                    new SimpleDataSet();
+        }
+
+        @Override
+        public String toString()
+        {
+            return "TestCase{" + expression + ", " + result + '}';
+        }
+        
+        
     }
 }

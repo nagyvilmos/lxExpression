@@ -14,6 +14,9 @@ import lexa.test.TestClass;
 public class TestFunctionLibrary extends TestClass
 {
 
+    /**
+     *
+     */
     public TestFunctionLibrary()
     {
     }

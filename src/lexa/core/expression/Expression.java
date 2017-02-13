@@ -34,7 +34,7 @@ public abstract class Expression {
     /**
      * During evaluation this method is called to determine the value.
      * <br>
-     * A {@see DataSet} provides values for determining the result which is then returned.
+     * A {@link DataSet} provides values for determining the result which is then returned.
      * @param data  The input to feed the expression.
      * @return The result of the evaluation
      * @throws ExpressionException when an error occurs in evaluation the expression
@@ -52,7 +52,7 @@ public abstract class Expression {
     }
 
     /**
-     * Helper function for parsing a {@see String} to a {@see Boolean}
+     * Helper function for parsing a {@link String} to a {@link Boolean}
      * @param   string
      *          a String to convert to Boolean
      * @return  {@code true} if the string is {@code "true"},
@@ -64,7 +64,7 @@ public abstract class Expression {
     }
 
     /**
-     * Helper function for parsing a {@see String} to a {@see Date}
+     * Helper function for parsing a {@link String} to a {@link Date}
      * @param string a String to convert to Date
      * @return the date if the string contains a date otherwise {@code null}.
      */
@@ -76,7 +76,7 @@ public abstract class Expression {
     }
 
     /**
-     * Helper function for parsing a {@see String} to a {@see Double}
+     * Helper function for parsing a {@link String} to a {@link Double}
      * @param string a String to convert to Double
      * @return the number if the string contains a double otherwise {@code null}.
      */
@@ -88,7 +88,7 @@ public abstract class Expression {
     }
 
     /**
-     * Helper function for parsing a {@see String} to an {@see Integer}
+     * Helper function for parsing a {@link String} to an {@link Integer}
      * @param string a String to convert to integer
      * @return the number if the string contains an integer otherwise {@code null}.
      */
@@ -100,7 +100,7 @@ public abstract class Expression {
     }
 
     /**
-     * Helper function for parsing a {@see String} to a {@see Long}
+     * Helper function for parsing a {@link String} to a {@link Long}
      * @param string a String to convert to long
      * @return the number if the string contains a long otherwise {@code null}.
      */
@@ -112,7 +112,7 @@ public abstract class Expression {
     }
 	
     /**
-     * Helper function for parsing a {@see String} from an expression to a {@see String}
+     * Helper function for parsing a {@link String} from an expression to a {@link String}
      * @param string a String to convert
      * @return the string contains if it is delimited by {@code "} otherwise {@code null}.
      */
@@ -139,7 +139,7 @@ public abstract class Expression {
 		return parse(expressionText, FunctionLibrary.base());
 	}
 
-		/**
+    /**
 	Parse a string to form an expression
 	<br>
 	This parses the expression using the supplied function library.
@@ -163,15 +163,15 @@ public static Expression parse(String expressionText, FunctionLibrary library)
 	}
 
 	/**
-	 * Parse the text for an expression:
+	 * Parse the text for an expression
 	 * <pre>
 	 * EXPRESSION ::= ID "=" ELEMENT
 	 *              | LOGICAL_OR
 	 * </pre>
-	 *
-	 * @param   start
-	 *          the word at which to start parsing.
-	 * @return  an {@see Expression} and the index of the last word.
+     * 
+	 * @param   tokens
+	 *          the token list pointing to the start of the expression.
+     * @throws  ExpressionException when the expression cannot be parsed.
 	 */
 	static void expression(ExpressionTokens tokens)
 			throws ExpressionException

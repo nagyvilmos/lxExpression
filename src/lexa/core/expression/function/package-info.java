@@ -26,7 +26,7 @@
  * maxTwo {
  *   arguments a b
  *   expression "
- *     a > b ? a : b
+ *     a &gt; b ? a : b
  *   "
  * }
  * </pre>
@@ -50,7 +50,7 @@
  *         data = [data.clone set];
  *         [data.remove data [data.key data 0]];
  *         max = [maxInSet data];
- *         (v0 > max) ?
+ *         (v0 &gt; max) ?
  *           v0 :
  *           max
  *       )

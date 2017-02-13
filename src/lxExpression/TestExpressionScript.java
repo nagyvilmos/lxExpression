@@ -60,8 +60,6 @@ import lexa.test.TestAnnotation;
  *		from the source data and the result passed through the test expression.</dd>
  * </dl>
  * 
- * @param args the command line arguments, maximum of one, containing the test file name.  If omitted
- * the default file name is {@code test.expression.lexa} in the runtime folder.
  * @author william
  */
 @TestAnnotation(setUp = "loadTestFile")        
@@ -75,6 +73,11 @@ public class TestExpressionScript extends TestClass
         this.testFile = testFile;
     }
     
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
     public Boolean loadTestFile()
             throws IOException
     {
@@ -88,6 +91,10 @@ public class TestExpressionScript extends TestClass
     return true;
     }
     
+    /**
+     *
+     * @return
+     */
     public Object[] testList()
     {
         return this.testData.contains("function") ?

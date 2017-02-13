@@ -16,9 +16,9 @@
 package lexa.core.expression;
 
 /**
- * Compare the results of two {@see Expression} evaluations.
+ * Compare the results of two {@link Expression} evaluations.
  * <p>Both expressions must return results of the same type and the class must
- * implement {@see Comparable}.
+ * implement {@link Comparable}.
  * <p>If either results is null, the return will be null, otherwise it will be
  * {@code true} or {@code false} depending on the result.
  * <p>If the first expression returns null, then the second is not evaluated.

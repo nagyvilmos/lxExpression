@@ -75,19 +75,35 @@ public final class FunctionLibrary
 		this(null,null);
 	}
 
-	public FunctionLibrary(DataSet functions)
+    /**
+     *
+     * @param functions
+     * @throws ExpressionException
+     */
+    public FunctionLibrary(DataSet functions)
 			throws ExpressionException
 	{
 		this(FunctionLibrary.base(), functions);
 	}
 
-	public FunctionLibrary(FunctionLibrary parent)
+    /**
+     *
+     * @param parent
+     * @throws ExpressionException
+     */
+    public FunctionLibrary(FunctionLibrary parent)
 			throws ExpressionException
 	{
 		this(parent, null);
 	}
 
-	public FunctionLibrary(FunctionLibrary parent, DataSet functions)
+    /**
+     *
+     * @param parent
+     * @param functions
+     * @throws ExpressionException
+     */
+    public FunctionLibrary(FunctionLibrary parent, DataSet functions)
 			throws ExpressionException
 	{
 		this.parent = parent;
@@ -129,6 +145,13 @@ public final class FunctionLibrary
 		}
 	}
 	*/
+
+    /**
+     *
+     * @param function
+     * @throws ExpressionException
+     */
+
 	
 	public final void addFunction(Function function)
 			throws ExpressionException
@@ -141,12 +164,24 @@ public final class FunctionLibrary
 		function.parse(this);
 	}
 
-	public final void addFunction(String name, DataSet data)
+    /**
+     *
+     * @param name
+     * @param data
+     * @throws ExpressionException
+     */
+    public final void addFunction(String name, DataSet data)
 			throws ExpressionException
 	{
 		this.addFunction(new FunctionFromExpression( name, data));
 	}
-	public final void addFunctions(DataSet data)
+
+    /**
+     *
+     * @param data
+     * @throws ExpressionException
+     */
+    public final void addFunctions(DataSet data)
 			throws ExpressionException
 	{
 		if (data == null)
@@ -160,7 +195,13 @@ public final class FunctionLibrary
 		}
 	}
 
-	public final Function getFunction(String name)
+    /**
+     *
+     * @param name
+     * @return
+     * @throws ExpressionException
+     */
+    public final Function getFunction(String name)
 			throws ExpressionException
 	{
 		if (name == null || "".equals(name)) {
@@ -199,11 +240,20 @@ public final class FunctionLibrary
 		}
 	}
 
-	public Set<String> functions()
+    /**
+     *
+     * @return
+     */
+    public Set<String> functions()
 	{
 		return new TreeSet(this.functions.keySet());
 	}
-	public Set<String> allFunctions()
+
+    /**
+     *
+     * @return
+     */
+    public Set<String> allFunctions()
 	{
 		Set<String> fl =  this.functions();
 		if (this.parent != null) 

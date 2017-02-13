@@ -21,12 +21,22 @@ public class MapDataSet
 {
 	private final ExpressionMap expressionMap;
 	
-	public MapDataSet(ExpressionMap expressionMap, DataSet data)
+    /**
+     *
+     * @param expressionMap
+     * @param data
+     */
+    public MapDataSet(ExpressionMap expressionMap, DataSet data)
 	{
 		super(data);
 		this.expressionMap = expressionMap;
 	}
-	public MapDataSet(MapDataSet clone)
+
+    /**
+     *
+     * @param clone
+     */
+    public MapDataSet(MapDataSet clone)
 	{
 		super(clone);
 		this.expressionMap = clone.expressionMap;
@@ -38,7 +48,12 @@ public class MapDataSet
 		return new MapDataSet(this);
 	}
 	
-	@Override
+    /**
+     *
+     * @param key
+     * @return
+     */
+    @Override
 	public synchronized DataItem get(String key)
 	{
 		DataItem item = super.get(key);

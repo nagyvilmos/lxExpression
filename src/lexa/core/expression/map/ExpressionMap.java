@@ -22,7 +22,13 @@ public class ExpressionMap
 	private final Map<String,Expression> expressions;
 	private final Map<String,ExpressionMap> children;
 
-	public ExpressionMap(DataSet map, FunctionLibrary library) throws ExpressionException
+    /**
+     *
+     * @param map
+     * @param library
+     * @throws ExpressionException
+     */
+    public ExpressionMap(DataSet map, FunctionLibrary library) throws ExpressionException
 	{
 		this.expressions = new HashMap<>();
 		this.children = new HashMap<>();
@@ -49,7 +55,14 @@ public class ExpressionMap
 		}
 	}
 	
-	public Object evaluate(String key, MapDataSet data)
+    /**
+     *
+     * @param key
+     * @param data
+     * @return
+     * @throws ExpressionException
+     */
+    public Object evaluate(String key, MapDataSet data)
 			throws ExpressionException
 	{
 		if (this.expressions.containsKey(key))

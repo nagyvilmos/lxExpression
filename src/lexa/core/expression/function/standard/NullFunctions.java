@@ -18,7 +18,11 @@ public class NullFunctions
 	{
 	}
 
-	public static Function[] getFunctions()
+    /**
+     *
+     * @return
+     */
+    public static Function[] getFunctions()
 	{
 		return new Function[]{
 			isNull(),

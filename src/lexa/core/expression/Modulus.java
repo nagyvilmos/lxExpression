@@ -33,7 +33,7 @@ public class Modulus
     }
 
     /**
-     * Calculate the modulus of two {@see Double} numbers.
+     * Calculate the modulus of two {@link Double} numbers.
      * @param lhs the left hand side of the expression; value.
      * @param rhs the right hand side of the expression; modulo.
      * @return {@code null} if the modulo is less than or equal to zero,
@@ -48,7 +48,7 @@ public class Modulus
     }
 
     /**
-     * Calculate the modulus of two {@see Integer} numbers.
+     * Calculate the modulus of two {@link Integer} numbers.
      * @param lhs the left hand side of the expression; value.
      * @param rhs the right hand side of the expression; modulo.
      * @return {@code null} if the modulo is less than or equal to zero,

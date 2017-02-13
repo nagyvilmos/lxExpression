@@ -15,6 +15,7 @@
  * 2013-10-02	WNW				Make the test support function overload
  * 2013-10-24	WNW				Clean up code & comments.
  * 2014-07-11	WNW	v2			Redux - Lose the expression builder [eek]
+ * 2017-02-05   WNW             Convert to use the lxTest library.
  *================================================================================
  */
 
@@ -28,7 +29,7 @@ import lexa.test.TestRun;
 /**
  * Tester for the expression evaluator.
  * <br>
- * Uses a {@see DataSet} file to store test expressions.
+ * Uses a {@link lexa.core.data.DataSet} file to store test expressions.
  * @author William
  * @since 2013-03
  * @see lexa.core.data
@@ -37,6 +38,11 @@ import lexa.test.TestRun;
  * @see lexa.core.expression.function.standard
  */
 public class ExpressionTest {
+
+    /**
+     *
+     * @param args
+     */
     public static void main(String ... args)
     {
         TestClass[] tests = new TestClass[]

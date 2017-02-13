@@ -19,7 +19,11 @@ public class StringFunctions
 	
 	}
 	
-	public static Function[] getFunctions()
+    /**
+     *
+     * @return
+     */
+    public static Function[] getFunctions()
 	{
 		Function[] functions =
 		{
@@ -146,7 +150,7 @@ public class StringFunctions
 				for (int a = 0;
 						a < args.length;
 						a++) {
-					Object o = arguments.getValue("~" + a);
+					Object o = arguments.getObject("~" + a);
 					args[a] = o == null ? ":NULL:" : o;
 				}
 				String fs = arguments.getString("string");
