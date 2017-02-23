@@ -16,7 +16,7 @@
 package lexa.core.expression;
 
 import lexa.core.data.DataSet;
-import lexa.core.data.SimpleDataSet;
+import lexa.core.data.ArrayDataSet;
 
 /**
  * Assign a value within an expression.
@@ -99,7 +99,7 @@ public class Assign extends Expression {
             String subKey = key.substring(point+1);
             DataSet subData = data.getDataSet(setKey);
             if (subData == null) {
-                subData = new SimpleDataSet();
+                subData = new ArrayDataSet();
                 data.put(setKey,subData);
             }
             assign(subData, subKey, value);

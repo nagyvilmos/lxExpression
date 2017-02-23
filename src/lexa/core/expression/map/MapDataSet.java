@@ -8,8 +8,8 @@ package lexa.core.expression.map;
 
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
-import lexa.core.data.SimpleDataItem;
-import lexa.core.data.SimpleDataSet;
+import lexa.core.data.ArrayDataItem;
+import lexa.core.data.ArrayDataSet;
 import lexa.core.expression.ExpressionException;
 
 /**
@@ -17,7 +17,7 @@ import lexa.core.expression.ExpressionException;
  * @author william
  */
 public class MapDataSet
-		extends SimpleDataSet
+		extends ArrayDataSet
 {
 	private final ExpressionMap expressionMap;
 	
@@ -73,7 +73,7 @@ public class MapDataSet
 			ex.printStackTrace();
 			value = ex; // rather messy
 		}
-		item = new SimpleDataItem(key,value);
+		item = new ArrayDataItem(key,value);
 		this.put(item);
 		return item;
 	}

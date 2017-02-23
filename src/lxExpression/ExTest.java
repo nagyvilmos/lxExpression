@@ -6,16 +6,13 @@
 package lxExpression;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import lexa.core.data.DataSet;
-import lexa.core.data.SimpleDataSet;
+import lexa.core.data.ArrayDataSet;
 import lexa.core.data.io.DataReader;
 import lexa.core.expression.Expression;
 import lexa.core.expression.ExpressionException;
 import lexa.core.expression.function.FunctionLibrary;
-import lexa.core.expression.map.ExpressionMap;
-import lexa.core.expression.map.MapDataSet;
 import lexa.core.expression.map.ExpressionMap;
 import lexa.core.expression.map.MapDataSet;
 /**
@@ -68,7 +65,7 @@ public class ExTest
 				null;
         this.data =  testData.contains("data") ?
 				testData.getDataSet("data") :
-				new SimpleDataSet();
+				new ArrayDataSet();
         this.tests = testData.getDataSet("test");
     }
 
@@ -128,16 +125,16 @@ public class ExTest
 			if (hasResult) {
 				results.append("\nExpected:").append(expected);
 			}
-			DataSet testData = new SimpleDataSet(this.data);
+			DataSet testData = new ArrayDataSet(this.data);
 			if (test.contains("data"))
 			{
 				testData.put(test.getDataSet("data"));
 			}
-			
+
 			// is there a map?
 			DataSet testMap = this.map != null ?
-					new SimpleDataSet(this.map) :
-					new SimpleDataSet();
+					new ArrayDataSet(this.map) :
+					new ArrayDataSet();
 			if (test.contains("map"))
 			{
 				testMap.put(test.getDataSet("map"));
@@ -199,5 +196,5 @@ public class ExTest
         }
 
     }
-    
+
 }

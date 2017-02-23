@@ -6,7 +6,7 @@
 package lxExpression;
 
 import lexa.core.data.DataSet;
-import lexa.core.data.SimpleDataSet;
+import lexa.core.data.ArrayDataSet;
 import lexa.core.expression.Expression;
 import lexa.core.expression.ExpressionException;
 import lexa.test.TestClass;
@@ -38,7 +38,7 @@ public class TestExpressionParsing extends TestClass
         return new TestCase[]{
             new TestCase("1 + 2", 3, null),
             new TestCase("[string.format \"I have %1$d horses for gin\" 4]", "I have 4 horses for gin", null),
-            new TestCase("(a * b) / c", 6, new SimpleDataSet().put("a",3).put("b",4).put("c",2))
+            new TestCase("(a * b) / c", 6, new ArrayDataSet().put("a",3).put("b",4).put("c",2))
         };
     }
     
@@ -110,7 +110,7 @@ public class TestExpressionParsing extends TestClass
             this.expression = expression;
             this.result = result;
             this.data = (data != null) ? data :
-                    new SimpleDataSet();
+                    new ArrayDataSet();
         }
 
         @Override

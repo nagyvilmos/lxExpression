@@ -16,7 +16,7 @@
 package lexa.core.expression.function;
 
 import lexa.core.data.DataSet;
-import lexa.core.data.SimpleDataSet;
+import lexa.core.data.ArrayDataSet;
 import lexa.core.expression.Expression;
 import lexa.core.expression.ExpressionException;
 
@@ -106,7 +106,7 @@ public abstract class Function {
 	 */
     public Object evaluate(DataSet data, Expression[] argumentExpressions)
             throws ExpressionException {
-		DataSet argData = new SimpleDataSet();
+		DataSet argData = new ArrayDataSet();
 		int max = this.getArgumentCount()-1;
 		for (int a =0;
 				a < this.getArgumentCount();

@@ -5,7 +5,7 @@
 package lexa.core.expression.function.standard;
 
 import lexa.core.data.DataSet;
-import lexa.core.data.SimpleDataSet;
+import lexa.core.data.ArrayDataSet;
 import lexa.core.expression.function.Function;
 
 /**
@@ -58,7 +58,7 @@ public class DataFunctions
 			@Override
 			public Object execute(DataSet arguments)
 			{
-				return new SimpleDataSet(arguments.getDataSet("data"));
+				return new ArrayDataSet(arguments.getDataSet("data"));
 			}
 
 		};

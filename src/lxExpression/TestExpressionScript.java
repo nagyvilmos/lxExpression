@@ -128,7 +128,7 @@ public class TestExpressionScript extends TestClass
 //				null;
 //        this.data =  testData.contains("data") ?
 //				testData.getDataSet("data") :
-//				new SimpleDataSet();
+//				new ArrayDataSet();
 //        this.tests = testData.getDataSet("test");
 //    }
 }
