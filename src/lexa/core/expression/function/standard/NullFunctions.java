@@ -30,7 +30,7 @@ public class NullFunctions
 			nullValue()
 		};
 	}
-	
+
 	private static Function isNull()
 	{
 		return new StaticFunction("isNull","value")
@@ -44,7 +44,7 @@ public class NullFunctions
 			public Object execute(DataSet arguments)
 			{
 				return arguments.contains("value") ?
-						arguments.getValue("value") == null :
+						arguments.getObject("value") == null :
 						true;
 			}
 		};
@@ -68,7 +68,7 @@ public class NullFunctions
 	private static Function nullValue()
 	{
 		return new StaticFunction("nullValue", "value","whenNull")
-		{			
+		{
 			@Override
 			public String describe()
 			{
@@ -78,10 +78,10 @@ public class NullFunctions
 			public Object execute(DataSet arguments)
 					throws ExpressionException
 			{
-				Object value = arguments.getValue("value");
+				Object value = arguments.getObject("value");
 				return value != null ?
 						value :
-						arguments.getValue("whenNull");
+						arguments.getObject("whenNull");
 			}
 		};
 	}

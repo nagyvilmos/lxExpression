@@ -11,9 +11,9 @@ import lexa.core.expression.function.Function;
  *
  * @author william
  */
-public class MathFunctions
+public class MathsFunctions
 {
-	private MathFunctions()
+	private MathsFunctions()
 	{
 	}
 
@@ -36,7 +36,7 @@ public class MathFunctions
 
 	private static Function cos()
 	{
-		return new StaticFunction("math.cos", "degrees")
+		return new StaticFunction("maths.cos", "degrees")
 		{
 			@Override
 			public String describe()
@@ -54,7 +54,7 @@ public class MathFunctions
 
 	private static Function pi()
 	{
-		return new StaticFunction("math.pi")
+		return new StaticFunction("maths.pi")
 		{
 			@Override
 			public String describe()
@@ -71,7 +71,7 @@ public class MathFunctions
 
 	private static Function sin()
 	{
-		return new StaticFunction("math.sin", "degrees")
+		return new StaticFunction("maths.sin", "degrees")
 		{
 			@Override
 			public String describe()
@@ -89,7 +89,7 @@ public class MathFunctions
 
 	private static Function tan()
 	{
-		return new StaticFunction("math.tan", "degrees")
+		return new StaticFunction("maths.tan", "degrees")
 		{
 			@Override
 			public String describe()

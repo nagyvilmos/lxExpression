@@ -35,7 +35,7 @@ public class FunctionCall
 		}
 		boolean done = false;
 		tokens.next();
-		ArrayList<Expression> args = new ArrayList();
+		ArrayList<Expression> args = new ArrayList<>();
 		while (!done && !tokens.done())
 		{
 			if (tokens.getType() == WordType.END_FUNCTION)

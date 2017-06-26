@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lxExpression;
+package lxexpression;
 
 import java.io.File;
 import java.io.IOException;
 import lexa.core.data.DataSet;
 import lexa.core.data.io.DataReader;
-import lexa.core.expression.function.FunctionLibrary;
 import lexa.test.TestClass;
 import lexa.test.TestAnnotation;
+import lexa.test.TestResult;
 
 /**
  * Test the expression evaluator.
@@ -59,76 +59,125 @@ import lexa.test.TestAnnotation;
  * <dt>&lt;expression map&gt;</dt><dd>Expression map to use to generate the test data; the map is evaluated
  *		from the source data and the result passed through the test expression.</dd>
  * </dl>
- * 
+ *
  * @author william
  */
-@TestAnnotation(setUp = "loadTestFile")        
+@TestAnnotation(setUp = "loadTestFile")
 public class TestExpressionScript extends TestClass
 {
 
-    private final String testFile;
+    private boolean silent;
+
+    private boolean stopOnError;
+
+    private final File testFile;
     private DataSet testData;
+    private String[] testList;
     TestExpressionScript(String testFile)
     {
-        this.testFile = testFile;
+        this.testFile = new File(testFile);
     }
-    
+
     /**
-     *
+     * Load the test file
+     * This just reads in the file, ie the data set containing the test
+     * script to perform
      * @return
-     * @throws IOException
+     * @throws java.io.FileNotFoundException
      */
-    public Boolean loadTestFile()
+    public TestResult loadTestFile()
             throws IOException
     {
-        this.testData = new DataReader(new File(this.testFile)).read();
-//        this.stopOnError = testData.contains("stopOnError") ?
-//				testData.getBoolean("stopOnError") :
-//				false;
-//        this.silent = testData.contains("silent") ?
-//				testData.getBoolean("silent") :
-//				true;
-    return true;
-    }
-    
-    /**
-     *
-     * @return
-     */
-    public Object[] testList()
-    {
-        return this.testData.contains("function") ?
+        if (!this.testFile.exists())
+        {
+            return new TestResult(false, "File does not exist : " + this.testFile.getAbsolutePath());
+        }
+        this.testData = new DataReader(this.testFile).read();
+
+        this.stopOnError = this.testData.contains("stopOnError") ?
+				this.testData.getBoolean("stopOnError") :
+				false;
+        this.silent = this.testData.contains("silent") ?
+				this.testData.getBoolean("silent") :
+				true;
+
+        this.testList = this.testData.contains("testList") ?
                 this.testData.getString("testList").split(" ") :
                 this.testData.getDataSet("test").keys();
+
+        // we have results, that's all we need
+        return new TestResult(true);
     }
-    
+
+    public Object[] testList()
+    {
+        return this.testList;
+    }
+
+    public TestResult setUpTest(Object test)
+    {
+        String testName = (String)test;
+
+        return TestResult.all(
+                this.setUpEnvironment(testName),
+                this.setUpFunctions(testName),
+                this.setUpData(testName)
+        );
+    }
+
+    private TestResult setUpEnvironment(String testName)
+    {
+        return TestResult.result(false);
+    }
+
+    private TestResult setUpFunctions(String testName)
+    {
+        return TestResult.result(false);
+    }
+
+    private TestResult setUpData(String testName)
+    {
+        return TestResult.result(false);
+    }
+
+//    /**
+//     *
+//     * @return
+//     */
+//    public Object[] testList()
+//    {
 //        return this.testData.contains("function") ?
-//				new FunctionLibrary(testData.getDataSet("function")) :
-//				FunctionLibrary.base();
-//		if (!this.silent && testData.contains("function"))
-//		{
-//			System.out.println("---Global Library:\n");
-//			this.library.allFunctions().stream().forEach((String function) ->
-//			{
-//				try
-//				{
-//					System.out.println(
-//							this.library.getFunction(function).help());
-//				}
-//				catch (ExpressionException ex)
-//				{
-//					ex.printStackTrace();
-//				}
-//			});
-//			System.out.println("---\n");
-//		}
-//
-//		this.map =  testData.contains("map") ?
-//				testData.getDataSet("map") :
-//				null;
-//        this.data =  testData.contains("data") ?
-//				testData.getDataSet("data") :
-//				new ArrayDataSet();
-//        this.tests = testData.getDataSet("test");
+//                this.testData.getString("testList").split(" ") :
+//                this.testData.getDataSet("test").keys();
 //    }
+//
+////        return this.testData.contains("function") ?
+////				new FunctionLibrary(testData.getDataSet("function")) :
+////				FunctionLibrary.base();
+////		if (!this.silent && testData.contains("function"))
+////		{
+////			System.out.println("---Global Library:\n");
+////			this.library.allFunctions().stream().forEach((String function) ->
+////			{
+////				try
+////				{
+////					System.out.println(
+////							this.library.getFunction(function).help());
+////				}
+////				catch (ExpressionException ex)
+////				{
+////					ex.printStackTrace();
+////				}
+////			});
+////			System.out.println("---\n");
+////		}
+////
+////		this.map =  testData.contains("map") ?
+////				testData.getDataSet("map") :
+////				null;
+////        this.data =  testData.contains("data") ?
+////				testData.getDataSet("data") :
+////				new ArrayDataSet();
+////        this.tests = testData.getDataSet("test");
+////    }
 }

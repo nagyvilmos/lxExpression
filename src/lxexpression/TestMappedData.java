@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lxExpression;
+package lxexpression;
 
+import lexa.test.TestAnnotation;
 import lexa.test.TestClass;
+import lexa.test.TestResult;
 
 /**
  *
@@ -20,5 +22,12 @@ public class TestMappedData extends TestClass
     public TestMappedData()
     {
     }
-    
+
+
+    @TestAnnotation
+    public TestResult mapNotImplimented()
+    {
+        // just so we know it doesn't work yet
+        return TestResult.result(false);
+    }
 }

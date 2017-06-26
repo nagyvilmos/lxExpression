@@ -16,6 +16,7 @@
 package lexa.core.expression;
 
 import lexa.core.data.DataSet;
+import lexa.core.data.DataValue;
 
 /**
  * Represent an expression as a single element<br>
@@ -59,11 +60,7 @@ public class Element
 			}
 		}
 	}
-//    /** The value of the element */
-//    private final Object value;
-//    /** indicates if the value is a literal or not */
-//    private final boolean literal;
-	
+
 	private final InternalElement element;
 	private final boolean literal;
 
@@ -107,27 +104,6 @@ public class Element
         }
 		this.literal = lit;
         this.element = el;
-    }
-
-    /**
-     * Retrieve an item from a {@link DataSet}.
-     * <br>
-     * This method allows the tree to be walked by using a dot notation to
-     * drill down through the tree.
-     * @param key the key of the required item.
-     * @param data the data containing the item
-     * @return the value of the item or null if it does not exist
-     */
-    private static Object dataSetValue(String key, DataSet data) {
-        int index = key.indexOf(".");
-        if (index > -1) {
-            DataSet sub = data.getDataSet(key.substring(0,index));
-            if (sub == null) {
-                return null;
-            }
-            return Element.dataSetValue(key.substring(index+1),sub);
-        }
-        return data.getObject(key);
     }
 
     /**
@@ -193,7 +169,7 @@ public class Element
 		}
 	}
 
-	private static class LiteralElement 
+	private static class LiteralElement
 			implements InternalElement
 	{
 
@@ -216,7 +192,7 @@ public class Element
 		public String toString() {
 			return '(' + literal.toString() + ')';
 		}
-		
+
 	}
 	private static class IdElement
 			implements InternalElement
@@ -232,7 +208,10 @@ public class Element
 				throws ExpressionException
 		{
 			//return data.getValue(id);
-			return dataSetValue(this.id, data);
+            DataValue value = data.item(this.id);
+			return value != null ?
+                    value.getObject() :
+                    null;
 		}
 		/**
 		 * The string representation of the element.

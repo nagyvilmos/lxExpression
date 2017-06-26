@@ -19,7 +19,7 @@ package lexa.core.expression.function;
 import lexa.core.expression.function.standard.NullFunctions;
 import lexa.core.expression.function.standard.DataFunctions;
 import lexa.core.expression.function.standard.StringFunctions;
-import lexa.core.expression.function.standard.MathFunctions;
+import lexa.core.expression.function.standard.MathsFunctions;
 import java.util.*;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataSet;
@@ -55,7 +55,7 @@ public final class FunctionLibrary
 
 	/**
 	Get the base library of inbuilt functions
-	@return the base library 
+	@return the base library
 	*/
 	public static FunctionLibrary base()
 	{
@@ -107,7 +107,7 @@ public final class FunctionLibrary
 			throws ExpressionException
 	{
 		this.parent = parent;
-		this.functions = new HashMap();
+		this.functions = new HashMap<>();
 		boolean bl = (parent == null);
 		if (bl)
 		{
@@ -152,7 +152,7 @@ public final class FunctionLibrary
      * @throws ExpressionException
      */
 
-	
+
 	public final void addFunction(Function function)
 			throws ExpressionException
 	{
@@ -216,8 +216,8 @@ public final class FunctionLibrary
 		{
 			return this.parent.getFunction(name);
 		}
-		
-		throw new ExpressionException("Function not defined : " + name + '\n' + 
+
+		throw new ExpressionException("Function not defined : " + name + '\n' +
 				this.allFunctions().toString());
 	}
 
@@ -225,7 +225,7 @@ public final class FunctionLibrary
 			throws ExpressionException
 	{
 		this.loadInternalFunctions(NullFunctions.getFunctions());
-		this.loadInternalFunctions(MathFunctions.getFunctions());
+		this.loadInternalFunctions(MathsFunctions.getFunctions());
 		this.loadInternalFunctions(DataFunctions.getFunctions());
 		this.loadInternalFunctions(StringFunctions.getFunctions());
 	}
@@ -233,11 +233,10 @@ public final class FunctionLibrary
 	private void loadInternalFunctions(Function[] functions)
 			throws ExpressionException
 	{
-		for (int f = 0;
-				f < functions.length;
-				f++) {
-			this.addFunction(functions[f]);
-		}
+        for (Function function : functions)
+        {
+            this.addFunction(function);
+        }
 	}
 
     /**
@@ -246,7 +245,7 @@ public final class FunctionLibrary
      */
     public Set<String> functions()
 	{
-		return new TreeSet(this.functions.keySet());
+		return new TreeSet<>(this.functions.keySet());
 	}
 
     /**
@@ -256,7 +255,7 @@ public final class FunctionLibrary
     public Set<String> allFunctions()
 	{
 		Set<String> fl =  this.functions();
-		if (this.parent != null) 
+		if (this.parent != null)
 		{
 			fl.addAll(this.parent.allFunctions());
 		}

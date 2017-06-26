@@ -6,6 +6,7 @@ package lexa.core.expression.function.standard;
 
 import lexa.core.data.DataSet;
 import lexa.core.data.ArrayDataSet;
+import lexa.core.data.DataItem;
 import lexa.core.expression.function.Function;
 
 /**
@@ -105,7 +106,7 @@ public class DataFunctions
 			{
 				return arguments.getDataSet("data")
 						.get(arguments.getInteger("index"))
-						.getValue();
+						.getObject();
 			}
 		};
 	}
@@ -136,13 +137,18 @@ public class DataFunctions
 			@Override
 			public String describe()
 			{
-				return "remove the item for key in the data set";
+				return "remove the item for key in the data set, ";
 			}
 			@Override
 			public Object execute(DataSet arguments)
 			{
-				return arguments.getDataSet("data")
+                DataItem removed = arguments.getDataSet("data")
 						.remove(arguments.getString("key"));
+                // return the value's object not the item.
+                // expressions NEVER handle DataValue objects.
+                return removed != null ?
+                        removed.getObject() :
+                        null;
 			}
 		};
 	}

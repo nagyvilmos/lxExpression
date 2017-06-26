@@ -6,22 +6,10 @@
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: March 2013
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * 2013-08-10   WNW             Moved into main project to make testing a monkey's
- *                              tadger easier.
- * 2013-10-02	WNW				Make the test support function overload
- * 2013-10-24	WNW				Clean up code & comments.
- * 2014-07-11	WNW	v2			Redux - Lose the expression builder [eek]
- * 2017-02-05   WNW             Convert to use the lxTest library.
  *================================================================================
  */
 
-package lxExpression;
-
-//import java.io.*;
+package lxexpression;
 
 import lexa.test.TestClass;
 import lexa.test.TestRun;
@@ -58,8 +46,8 @@ public class ExpressionTest {
         System.out.println(
                 new TestRun(tests)
                         .execute()
-                        .getReport()
-        );  
+                        .getReport(false, true)
+        );
     }
 
    }
