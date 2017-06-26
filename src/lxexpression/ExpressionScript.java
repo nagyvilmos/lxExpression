@@ -63,7 +63,7 @@ import lexa.test.TestResult;
  * @author william
  */
 @TestAnnotation(setUp = "loadTestFile")
-public class TestExpressionScript extends TestClass
+public class ExpressionScript extends TestClass
 {
 
     private boolean silent;
@@ -73,7 +73,7 @@ public class TestExpressionScript extends TestClass
     private final File testFile;
     private DataSet testData;
     private String[] testList;
-    TestExpressionScript(String testFile)
+    ExpressionScript(String testFile)
     {
         this.testFile = new File(testFile);
     }

@@ -35,10 +35,10 @@ public class ExpressionTest {
     {
         TestClass[] tests = new TestClass[]
         {
-            new TestExpressionParsing(),
+            new ExpressionParsing(),
             new TestFunctionLibrary(),
             new TestMappedData(),
-            new TestExpressionScript(
+            new ExpressionScript(
                     (args != null && args.length > 0) ?
                             args[0] :
                             "test.expression.lexa")
