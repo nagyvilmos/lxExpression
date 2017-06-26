@@ -103,6 +103,14 @@ public abstract class Function {
             throws ExpressionException {
 		DataSet argData = new ArrayDataSet();
 		int max = this.getArgumentCount()-1;
+
+        // do we have enough arguments?
+        if (argumentExpressions.length < this.getArgumentCount())
+        {
+            throw new ExpressionException(
+                    "Invalid call to " + this.format()
+            );
+        }
 		for (int a =0;
 				a < this.getArgumentCount();
 				a++)

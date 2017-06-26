@@ -226,7 +226,7 @@ public class StringFunctions
 			public Object execute(DataSet arguments)
 			{
 				return arguments.getString("string").replaceAll(
-						arguments.getString("search"), arguments.getString("search"));
+						arguments.getString("search"), arguments.getString("replace"));
 			}
 		};
 	}
@@ -243,7 +243,7 @@ public class StringFunctions
 			public Object execute(DataSet arguments)
 			{
 				return arguments.getString("string").replaceFirst(
-						arguments.getString("search"), arguments.getString("search"));
+						arguments.getString("search"), arguments.getString("replace"));
 			}
 		};
 	}
