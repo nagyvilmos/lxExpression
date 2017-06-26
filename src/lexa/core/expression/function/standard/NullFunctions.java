@@ -1,6 +1,12 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * NullFunctions.java
+ *--------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: September 2013
+ *================================================================================
  */
 package lexa.core.expression.function.standard;
 
@@ -9,18 +15,17 @@ import lexa.core.expression.ExpressionException;
 import lexa.core.expression.function.Function;
 
 /**
- *
+ * Internal null reference handling functions.
  * @author william
+ * @since 2013-09
  */
 public class NullFunctions
 {
-	private NullFunctions()
-	{
-	}
+	private NullFunctions() { }
 
     /**
-     *
-     * @return
+     * Get the internal null reference handling functions
+     * @return an array of functions.
      */
     public static Function[] getFunctions()
 	{
@@ -33,7 +38,7 @@ public class NullFunctions
 
 	private static Function isNull()
 	{
-		return new StaticFunction("isNull","value")
+		return new InternalFunction("isNull","value")
 		{
 			@Override
 			public String describe()
@@ -51,7 +56,7 @@ public class NullFunctions
 	}
 	private static Function nullFunction()
 	{
-		return new StaticFunction("null")
+		return new InternalFunction("null")
 		{
 			@Override
 			public String describe()
@@ -67,7 +72,7 @@ public class NullFunctions
 	}
 	private static Function nullValue()
 	{
-		return new StaticFunction("nullValue", "value","whenNull")
+		return new InternalFunction("nullValue", "value","whenNull")
 		{
 			@Override
 			public String describe()

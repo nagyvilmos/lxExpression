@@ -6,11 +6,6 @@
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: March 2013
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * DD-MON-YY    ??
  *================================================================================
  */
 package lexa.core.expression;
@@ -110,7 +105,7 @@ public abstract class Expression {
         }
         return Expression.formatter.longFormat.fromString(string);
     }
-	
+
     /**
      * Helper function for parsing a {@link String} from an expression to a {@link String}
      * @param string a String to convert
@@ -122,11 +117,11 @@ public abstract class Expression {
         }
         return null;
     }
-	
+
 	/**
 	Parse a string to form an expression
 	<br>
-	This parses the expression using the base function library containing 
+	This parses the expression using the base function library containing
 	the in built functions.
 	@param expressionText a string representing an expression.
 	@return an expression object.
@@ -134,7 +129,7 @@ public abstract class Expression {
 	@see lexa.core.expression.function
 	*/
 	public static Expression parse(String expressionText)
-			throws ExpressionException 
+			throws ExpressionException
 	{
 		return parse(expressionText, FunctionLibrary.base());
 	}
@@ -168,7 +163,7 @@ public static Expression parse(String expressionText, FunctionLibrary library)
 	 * EXPRESSION ::= ID "=" ELEMENT
 	 *              | LOGICAL_OR
 	 * </pre>
-     * 
+     *
 	 * @param   tokens
 	 *          the token list pointing to the start of the expression.
      * @throws  ExpressionException when the expression cannot be parsed.

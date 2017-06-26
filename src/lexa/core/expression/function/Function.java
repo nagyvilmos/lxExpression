@@ -6,11 +6,6 @@
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: September 2013
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * 2014.11.17	WNW				Add  describe() method.
  *================================================================================
  */
 package lexa.core.expression.function;
@@ -70,7 +65,7 @@ public abstract class Function {
 
 	/**
 	Check that all the arguments are defined.
-	@param arguments argument data for the function 
+	@param arguments argument data for the function
 	@throws ExpressionException when an argument is missing.
 	*/
     private void checkArguments(DataSet arguments)
@@ -87,7 +82,7 @@ public abstract class Function {
     }
 
 	/**
-	Gets the number of arguments defined for the function. 
+	Gets the number of arguments defined for the function.
 	@return the number of arguments required.
 	*/
     public int getArgumentCount() {
@@ -101,7 +96,7 @@ public abstract class Function {
 	 * @param data source data for function
 	 * @param argumentExpressions the arguments as listed by the function definition
 	 * @return the result of evaluating the function.
-	 * 
+	 *
 	 * @throws ExpressionException when the function fails.
 	 */
     public Object evaluate(DataSet data, Expression[] argumentExpressions)
@@ -110,7 +105,7 @@ public abstract class Function {
 		int max = this.getArgumentCount()-1;
 		for (int a =0;
 				a < this.getArgumentCount();
-				a++) 
+				a++)
 		{
 			if (a < max || !"~".equals(this.arguments[a])) {
 				String k = this.arguments[a];
@@ -128,14 +123,14 @@ public abstract class Function {
 		}
         return this.evaluate(argData);
 	}
-	
+
 	/**
 	Evaluate the function.
 	<p>The arguments are checked and then the function is executed.
-	@param arguments argument data for the function 
+	@param arguments argument data for the function
 	@return the result of the function
 	@throws ExpressionException when the evaluation fails
-	@see Function#execute(lexa.core.data.DataSet) 
+	@see Function#execute(lexa.core.data.DataSet)
 	*/
     public Object evaluate(DataSet arguments)
             throws ExpressionException {
@@ -145,7 +140,7 @@ public abstract class Function {
 
 	/**
 	Execute the function
-	@param arguments argument data for the function 
+	@param arguments argument data for the function
 	@return the result of the function
 	@throws ExpressionException when the evaluation fails
 	*/
@@ -154,12 +149,12 @@ public abstract class Function {
 
 	/**
 	Parse the function for valid syntax for the current library.
-	@param library
-	@throws ExpressionException 
+	@param library the current library to use for parsing
+	@throws ExpressionException when parsing fails
 	*/
-	public abstract void parse(FunctionLibrary library) 
+	public abstract void parse(FunctionLibrary library)
 			throws ExpressionException;
-	
+
 	/**
 	Get the name of the function
 	@return the name of the function
@@ -191,8 +186,8 @@ public abstract class Function {
 	}
 
     /**
-     *
-     * @return
+     * Help string to describe the function
+     * @return a simple description of the function
      */
     public String help()
 	{

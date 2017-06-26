@@ -1,6 +1,12 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * MathsFunctions.java
+ *--------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: September 2013
+ *================================================================================
  */
 package lexa.core.expression.function.standard;
 
@@ -8,18 +14,17 @@ import lexa.core.data.DataSet;
 import lexa.core.expression.function.Function;
 
 /**
- *
+ * Internal mathematical functions.
  * @author william
+ * @since 2013-09
  */
 public class MathsFunctions
 {
-	private MathsFunctions()
-	{
-	}
+	private MathsFunctions() { }
 
     /**
-     *
-     * @return
+     * Get the internal mathematical functions
+     * @return an array of functions.
      */
     public static Function[] getFunctions()
 	{
@@ -36,7 +41,7 @@ public class MathsFunctions
 
 	private static Function cos()
 	{
-		return new StaticFunction("maths.cos", "degrees")
+		return new InternalFunction("maths.cos", "degrees")
 		{
 			@Override
 			public String describe()
@@ -54,7 +59,7 @@ public class MathsFunctions
 
 	private static Function pi()
 	{
-		return new StaticFunction("maths.pi")
+		return new InternalFunction("maths.pi")
 		{
 			@Override
 			public String describe()
@@ -71,7 +76,7 @@ public class MathsFunctions
 
 	private static Function sin()
 	{
-		return new StaticFunction("maths.sin", "degrees")
+		return new InternalFunction("maths.sin", "degrees")
 		{
 			@Override
 			public String describe()
@@ -89,7 +94,7 @@ public class MathsFunctions
 
 	private static Function tan()
 	{
-		return new StaticFunction("maths.tan", "degrees")
+		return new InternalFunction("maths.tan", "degrees")
 		{
 			@Override
 			public String describe()

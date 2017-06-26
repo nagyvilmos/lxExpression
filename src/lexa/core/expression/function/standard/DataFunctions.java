@@ -1,6 +1,12 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * DataFunctions.java
+ *--------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: September 2013
+ *================================================================================
  */
 package lexa.core.expression.function.standard;
 
@@ -10,21 +16,19 @@ import lexa.core.data.DataItem;
 import lexa.core.expression.function.Function;
 
 /**
- *
+ * Internal null reference handling functions.
  * @author william
+ * @since 2013-09
  */
 public class DataFunctions
 {
 
-	/** private constructor */
-	private DataFunctions()
-	{
-	}
+	private DataFunctions() { }
 
 	/**
-	Get the data functions
-	@return the data functions
-	*/
+     * Get the data functions
+	 * @return the data functions
+	 */
 	public static Function[] getFunctions()
 	{
 		Function[] functions =
@@ -48,7 +52,7 @@ public class DataFunctions
 	*/
 	private static Function dataClone()
 	{
-		return new StaticFunction("data.clone", "data")
+		return new InternalFunction("data.clone", "data")
 		{
 			@Override
 			public String describe()
@@ -73,7 +77,7 @@ public class DataFunctions
 	*/
 	private static Function contains()
 	{
-		return new StaticFunction("data.contains", "data", "key")
+		return new InternalFunction("data.contains", "data", "key")
 		{
 			@Override
 			public String describe()
@@ -94,7 +98,7 @@ public class DataFunctions
 
 	private static Function value()
 	{
-		return new StaticFunction("data.value", "data", "index")
+		return new InternalFunction("data.value", "data", "index")
 		{
 			@Override
 			public String describe()
@@ -113,7 +117,7 @@ public class DataFunctions
 
 	private static Function key()
 	{
-		return new StaticFunction("data.key", "data", "index")
+		return new InternalFunction("data.key", "data", "index")
 		{
 			@Override
 			public String describe()
@@ -132,7 +136,7 @@ public class DataFunctions
 
 	private static Function remove()
 	{
-		return new StaticFunction("data.remove", "data", "key")
+		return new InternalFunction("data.remove", "data", "key")
 		{
 			@Override
 			public String describe()
@@ -155,7 +159,7 @@ public class DataFunctions
 
 	private static Function size()
 	{
-		return new StaticFunction("data.size", "data")
+		return new InternalFunction("data.size", "data")
 		{
 			@Override
 			public String describe()
@@ -173,7 +177,7 @@ public class DataFunctions
 
 	private static Function map()
 	{
-		return new StaticFunction("data.map", "data", "map")
+		return new InternalFunction("data.map", "data", "map")
 		{
 			@Override
 			public String describe()

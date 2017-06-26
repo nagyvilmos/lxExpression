@@ -1,6 +1,12 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * ================================================================================
+ * Lexa - Property of William Norman-Walker
+ * --------------------------------------------------------------------------------
+ * InternalFunction.java
+ *--------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: September 2013
+ *================================================================================
  */
 package lexa.core.expression.function.standard;
 
@@ -8,20 +14,17 @@ import lexa.core.data.DataSet;
 import lexa.core.expression.function.Function;
 
 /**
- *
- * The format is [string.function *]
+ * Internal string handling functions.
  * @author william
+ * @since 2013-09
  */
 public class StringFunctions
 {
-	private StringFunctions()
-	{
-	
-	}
-	
+	private StringFunctions() { }
+
     /**
-     *
-     * @return
+     * Get the internal string handling functions
+     * @return an array of functions.
      */
     public static Function[] getFunctions()
 	{
@@ -40,7 +43,7 @@ public class StringFunctions
 			replaceFirst(),
 			starts(),
 			substring(),
-			upper()	
+			upper()
 		};
 
 		return functions;
@@ -48,7 +51,7 @@ public class StringFunctions
 
 	private static Function ends()
 	{
-		return new StaticFunction("string.ends", "string", "end")
+		return new InternalFunction("string.ends", "string", "end")
 		{
 			@Override
 			public String describe()
@@ -65,7 +68,7 @@ public class StringFunctions
 
 	private static Function find()
 	{
-		return new StaticFunction("string.find", "string", "find")
+		return new InternalFunction("string.find", "string", "find")
 		{
 			@Override
 			public String describe()
@@ -81,7 +84,7 @@ public class StringFunctions
 	}
 	private static Function findAfter()
 	{
-		return new StaticFunction("string.findAfter", "string", "find", "start")
+		return new InternalFunction("string.findAfter", "string", "find", "start")
 		{
 			@Override
 			public String describe()
@@ -99,7 +102,7 @@ public class StringFunctions
 
 	private static Function findBefore()
 	{
-		return new StaticFunction("string.findBefore", "string", "find", "before")
+		return new InternalFunction("string.findBefore", "string", "find", "before")
 		{
 			@Override
 			public String describe()
@@ -117,7 +120,7 @@ public class StringFunctions
 
 	private static Function findLast()
 	{
-		return new StaticFunction("string.findLast", "string", "find")
+		return new InternalFunction("string.findLast", "string", "find")
 		{
 			@Override
 			public String describe()
@@ -134,8 +137,8 @@ public class StringFunctions
 
 	private static Function format()
 	{
-		
-		return new StaticFunction("string.format", "string", "~")
+
+		return new InternalFunction("string.format", "string", "~")
 					// ~ the asteriks means 0 or many more args
 		{
 			@Override
@@ -161,7 +164,7 @@ public class StringFunctions
 
 	private static Function length()
 	{
-		return new StaticFunction("string.length", "string")
+		return new InternalFunction("string.length", "string")
 		{
 			@Override
 			public String describe()
@@ -178,7 +181,7 @@ public class StringFunctions
 
 	private static Function lower()
 	{
-		return new StaticFunction("string.lower", "string")
+		return new InternalFunction("string.lower", "string")
 		{
 			@Override
 			public String describe()
@@ -195,7 +198,7 @@ public class StringFunctions
 
 	private static Function matches()
 	{
-		return new StaticFunction("string.matches", "string", "regrxp")
+		return new InternalFunction("string.matches", "string", "regrxp")
 		{
 			@Override
 			public String describe()
@@ -212,7 +215,7 @@ public class StringFunctions
 
 	private static Function replace()
 	{
-		return new StaticFunction("string.replace", "string", "search", "replace")
+		return new InternalFunction("string.replace", "string", "search", "replace")
 		{
 			@Override
 			public String describe()
@@ -229,7 +232,7 @@ public class StringFunctions
 	}
 	private static Function replaceFirst()
 	{
-		return new StaticFunction("string.replaceFirst", "string", "search", "replace")
+		return new InternalFunction("string.replaceFirst", "string", "search", "replace")
 		{
 			@Override
 			public String describe()
@@ -247,7 +250,7 @@ public class StringFunctions
 
 	private static Function starts()
 	{
-		return new StaticFunction("string.starts", "string", "search")
+		return new InternalFunction("string.starts", "string", "search")
 		{
 			@Override
 			public String describe()
@@ -265,7 +268,7 @@ public class StringFunctions
 
 	private static Function substring()
 	{
-		return new StaticFunction("string.sub", "string", "start", "end")
+		return new InternalFunction("string.sub", "string", "start", "end")
 		{
 			@Override
 			public String describe()
@@ -283,7 +286,7 @@ public class StringFunctions
 
 	private static Function upper()
 	{
-		return new StaticFunction("string.upper", "string")
+		return new InternalFunction("string.upper", "string")
 		{
 			@Override
 			public String describe()

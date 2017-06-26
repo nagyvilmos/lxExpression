@@ -12,6 +12,8 @@ import lexa.core.data.io.DataReader;
 import lexa.test.TestClass;
 import lexa.test.TestAnnotation;
 import lexa.test.TestResult;
+import lexa.core.expression.function.FunctionLibrary;
+
 
 /**
  * Test the expression evaluator.
