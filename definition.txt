@@ -1,0 +1,51 @@
+// how do we do this?
+
+/*
+ Multi comment
+*/
+
+
+
+factorial = function(fact)
+{
+    fact < 0 ?
+        -factorial(-fact) :
+    fact > 1 ?
+        factorial(fact-1) :
+        fact;
+}
+ factorial(4); // returns 24
+
+foo = class(bar)
+{
+
+    call = function()
+    {
+        "result";
+    }
+}
+
+f = foo("jon");
+
+f.bar;       // returns "jon"
+f.call();  // returns "result"
+
+ext = class()
+{
+    foo("try");
+
+    second = function (text)
+    {
+        bar + " " +
+        call() + " " +
+        text;
+    }
+}
+
+e = ext();
+
+e.bar;              // returns "try"
+e.call();         // returns "result"
+e.second("smile")   // returns "try result smile"
+
+
