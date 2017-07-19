@@ -36,7 +36,6 @@ public class ExpressionTest {
         {
             new TestExpressionParsing(),
             new TestFunctionLibrary(),
-            new TestInternalFunction(),
             new TestMappedData(),
             new TestExpressionScript(
                     (args != null && args.length > 0) ?

@@ -14,12 +14,13 @@ import lexa.test.TestAnnotation;
 import lexa.test.TestResult;
 
 /**
- *
+ * Test general expression parsing
  * @author william
  */
 @TestAnnotation(
         arguments = "expressions")
-public class TestExpressionParsing extends TestClass
+public class TestExpressionParsing
+        extends TestClass
 {
 
     private DataSet data;
