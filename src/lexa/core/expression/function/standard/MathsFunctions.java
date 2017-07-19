@@ -41,7 +41,7 @@ public class MathsFunctions
 
 	private static Function cos()
 	{
-		return new InternalFunction("maths.cos", "degrees")
+		return new InternalFunction("cos", "degrees")
 		{
 			@Override
 			public String describe()
@@ -59,7 +59,7 @@ public class MathsFunctions
 
 	private static Function pi()
 	{
-		return new InternalFunction("maths.pi")
+		return new InternalFunction("pi")
 		{
 			@Override
 			public String describe()
@@ -76,7 +76,7 @@ public class MathsFunctions
 
 	private static Function sin()
 	{
-		return new InternalFunction("maths.sin", "degrees")
+		return new InternalFunction("sin", "degrees")
 		{
 			@Override
 			public String describe()
@@ -94,7 +94,7 @@ public class MathsFunctions
 
 	private static Function tan()
 	{
-		return new InternalFunction("maths.tan", "degrees")
+		return new InternalFunction("tan", "degrees")
 		{
 			@Override
 			public String describe()
