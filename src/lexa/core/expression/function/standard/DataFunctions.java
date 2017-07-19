@@ -153,7 +153,7 @@ public class DataFunctions
 
 	private static Function remove()
 	{
-		return new InternalFunction("data.remove", "data", "key")
+		return new InternalFunction("remove", "data", "key")
 		{
 			@Override
 			public String describe()
@@ -177,26 +177,8 @@ public class DataFunctions
 	private static Function size()
 	{
 		return new InternalFunction("size", "data")
-		{
-			@Override
-			public String describe()
-			{
-				return "get the size of the data set";
-			}
-			@Override
-			public Object execute(DataSet arguments)
-			{
-				return arguments.getDataSet("data")
-						.size();
-			}
-		};
-	}
-
-	private static Function map()
-	{
-		return new InternalFunction("data.map", "data", "map")
-		{
-			@Override
+        {
+            @Override
 			public String describe()
 			{
 				return "Get the size of a data set, array or string";
@@ -212,6 +194,23 @@ public class DataFunctions
                     case STRING     : return data.getString().length();
                 }
 				return null;
+			}
+		};
+	}
+
+	private static Function map()
+	{
+		return new InternalFunction("map", "data", "map")
+		{
+			@Override
+			public String describe()
+			{
+				return "** Not Implemented **";
+			}
+			@Override
+			public Object execute(DataSet arguments)
+			{
+                return null;
 			}
 		};
 	}

@@ -10,6 +10,7 @@
 
 package lxexpression;
 
+import lexa.core.data.ArrayDataArray;
 import lexa.core.data.ArrayDataSet;
 import lexa.core.data.DataSet;
 import lexa.core.expression.Expression;
@@ -39,22 +40,30 @@ public class TestFunctionLibrary extends TestClass
                             .put("a", 1)
                             .put("b", 2))
                 .put("num", 1.0)
-                .put("string", "the cat sat on the mat");
+                .put("string", "the cat sat on the mat")
+                .put("array", new ArrayDataArray()
+                    .add(1)
+                    .add(2)
+                    .add(3)
+        );
 
         return new TestCase[] {
             // Data library:
-            new TestCase(null, "data.clone data", data, data.getDataSet("data")),
-            new TestCase(null, "data.contains data \"a\"", data, true),
-            new TestCase(null, "data.contains data \"c\"", data, false),
-            new TestCase(null, "data.key data 1", data, "b"),
-            new TestCase(null, "data.value data 0", data, 1),
-            new TestCase(null, "data.remove data \"b\"", data, 2),
-            new TestCase(null, "data.map data map", data, null),
+            new TestCase(null, "clone data", data, data.getDataSet("data")),
+            new TestCase(null, "contains data \"a\"", data, true),
+            new TestCase(null, "contains data \"c\"", data, false),
+            new TestCase(null, "key data 1", data, "b"),
+            new TestCase(null, "value data 0", data, 1),
+            new TestCase(null, "remove data \"b\"", data, 2),
+            new TestCase(null, "map data map", data, null),
+            new TestCase(null, "size data", data, 2),
+            new TestCase(null, "size array", data, 3),
+            new TestCase(null, "size string", data, 22),
             // Maths library:
-			new TestCase(null, "maths.cos num", data, 0.5403023058681398),
-			new TestCase(null, "maths.pi num", data, 3.141592653589793),
-			new TestCase(null, "maths.sin num", data, 0.8414709848078965),
-			new TestCase(null, "maths.tan num", data, 1.5574077246549023),
+			new TestCase(null, "cos num", data, 0.5403023058681398),
+			new TestCase(null, "pi num", data, 3.141592653589793),
+			new TestCase(null, "sin num", data, 0.8414709848078965),
+			new TestCase(null, "tan num", data, 1.5574077246549023),
             new TestCase(null, "isNull data.a", data, false),
             new TestCase(null, "isNull data.c", data, true),
             // null handling
@@ -62,29 +71,30 @@ public class TestFunctionLibrary extends TestClass
 			new TestCase(null, "nullValue data.b 4", data, 2),
             new TestCase(null, "nullValue data.c 4", data, 4),
             // strings
-            new TestCase(null, "string.ends string \"mat\"", data, true),
-            new TestCase(null, "string.ends string \"cat\"", data, false),
-			new TestCase(null, "string.find string \"cat\"", data, 4),
-			new TestCase(null, "string.find string \"dog\"", data, -1),
-			new TestCase(null, "string.findAfter string \"cat\" 3", data, 4),
-			new TestCase(null, "string.findAfter string \"cat\" 5", data, -1),
-            new TestCase(null, "string.findAfter string \"dog\" 5", data, -1),
-			new TestCase(null, "string.findBefore string \"cat\" 3", data, -1),
-			new TestCase(null, "string.findBefore string \"cat\" 8", data, 4),
-            new TestCase(null, "string.findBefore string \"dog\" 5", data, -1),
-			new TestCase(null, "string.findLast string \"the\" ", data, 15),
-			new TestCase(null, "string.findLast string \"dog\" ", data, -1),
-			new TestCase(null, "string.format \"%1$d\" 5", data, "5"),
-			new TestCase(null, "string.length string", data, 22),
-			new TestCase(null, "string.lower \"MAT\"", data, "mat"),
-			new TestCase(null, "string.matches string \"[thecasonm ]*\"", data, true),
-			new TestCase(null, "string.matches string \"x*\"", data, false),
-			new TestCase(null, "string.replace string \"at\" \"is\"", data, "the cis sis on the mis"),
-			new TestCase(null, "string.replaceFirst string \"at\" \"is\"", data, "the cis sat on the mat"),
-			new TestCase(null, "string.starts string \"the\"", data, true),
-			new TestCase(null, "string.starts string \"thy\"", data, false),
-			new TestCase(null, "string.sub string 4 7", data, "cat"),
-			new TestCase(null, "string.upper string", data, "THE CAT SAT ON THE MAT"),
+            new TestCase(null, "ends string \"mat\"", data, true),
+            new TestCase(null, "ends string \"cat\"", data, false),
+			new TestCase(null, "find string \"cat\"", data, 4),
+			new TestCase(null, "find string \"dog\"", data, -1),
+			new TestCase(null, "findAfter string \"cat\" 3", data, 4),
+			new TestCase(null, "findAfter string \"cat\" 5", data, -1),
+            new TestCase(null, "findAfter string \"dog\" 5", data, -1),
+			new TestCase(null, "findBefore string \"cat\" 3", data, -1),
+			new TestCase(null, "findBefore string \"cat\" 8", data, 4),
+            new TestCase(null, "findBefore string \"dog\" 5", data, -1),
+			new TestCase(null, "findLast string \"the\" ", data, 15),
+			new TestCase(null, "findLast string \"dog\" ", data, -1),
+            new TestCase(null, "format \"add %1$d here\" 4", data, "add 4 here"),
+			new TestCase(null, "format \"%1$d\" 5", data, "5"),
+			new TestCase(null, "length string", data, 22),
+			new TestCase(null, "lower \"MAT\"", data, "mat"),
+			new TestCase(null, "matches string \"[thecasonm ]*\"", data, true),
+			new TestCase(null, "matches string \"x*\"", data, false),
+			new TestCase(null, "replace string \"at\" \"is\"", data, "the cis sis on the mis"),
+			new TestCase(null, "replaceFirst string \"at\" \"is\"", data, "the cis sat on the mat"),
+			new TestCase(null, "starts string \"the\"", data, true),
+			new TestCase(null, "starts string \"thy\"", data, false),
+			new TestCase(null, "substr string 4 7", data, "cat"),
+			new TestCase(null, "upper string", data, "THE CAT SAT ON THE MAT"),
        };
     }
 
