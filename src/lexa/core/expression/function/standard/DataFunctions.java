@@ -43,12 +43,25 @@ public class DataFunctions
 			size(),
 			map(),
             array(),
-            add()
+            addFunction()
 		};
 		return functions;
 	}
 
-    private static Function add()
+    static DataArray add(DataArray array, Object ... values)
+    {
+        if (values == null)
+        {
+            return array;
+        }
+        if (array == null)
+        {
+            return new ArrayDataArray(values);
+        }
+        return array.addAll(values);
+    }
+
+    private static Function addFunction()
     {
 		return new InternalFunction("add", "array", "~")
 		{

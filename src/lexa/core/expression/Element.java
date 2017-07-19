@@ -49,6 +49,11 @@ public class Element
 				tokens.next();
 				break;
 			}
+			case SUBTRACT:
+			{
+				Negative.expression(tokens.next());
+				break;
+			}
 			case START_FUNCTION:
 			{
 				FunctionCall.function(tokens);
