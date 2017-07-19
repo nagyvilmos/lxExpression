@@ -17,6 +17,7 @@ import lexa.test.TestClass;
  * @author  willaimnw
  * @since   2017-07
  */
+
 class TestInternalFunction extends TestClass
 {
 

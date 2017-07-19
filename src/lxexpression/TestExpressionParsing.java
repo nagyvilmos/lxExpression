@@ -19,7 +19,7 @@ import lexa.test.TestResult;
  */
 @TestAnnotation(
         arguments = "expressions")
-public class ExpressionParsing extends TestClass
+public class TestExpressionParsing extends TestClass
 {
 
     private DataSet data;

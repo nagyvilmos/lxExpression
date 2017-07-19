@@ -34,11 +34,11 @@ public class ExpressionTest {
     {
         TestClass[] tests = new TestClass[]
         {
-            new ExpressionParsing(),
+            new TestExpressionParsing(),
             new TestFunctionLibrary(),
             new TestInternalFunction(),
             new TestMappedData(),
-            new ExpressionScript(
+            new TestExpressionScript(
                     (args != null && args.length > 0) ?
                             args[0] :
                             "test.expression.lexa")

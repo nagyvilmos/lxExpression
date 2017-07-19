@@ -65,7 +65,7 @@ import lexa.core.expression.function.FunctionLibrary;
  * @author william
  */
 @TestAnnotation(setUp = "loadTestFile")
-public class ExpressionScript extends TestClass
+public class TestExpressionScript extends TestClass
 {
 
     private boolean silent;
@@ -75,7 +75,7 @@ public class ExpressionScript extends TestClass
     private final File testFile;
     private DataSet testData;
     private String[] testList;
-    ExpressionScript(String testFile)
+    TestExpressionScript(String testFile)
     {
         this.testFile = new File(testFile);
     }
