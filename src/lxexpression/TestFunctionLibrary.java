@@ -73,8 +73,8 @@ public class TestFunctionLibrary extends TestClass
             // strings
             new TestCase(null, "ends string \"mat\"", data, true),
             new TestCase(null, "ends string \"cat\"", data, false),
-			new TestCase(null, "find string \"cat\"", data, 4),
-			new TestCase(null, "find string \"dog\"", data, -1),
+			new TestCase(null, "findIn string \"cat\"", data, 4),
+			new TestCase(null, "findIn string \"dog\"", data, -1),
 			new TestCase(null, "findAfter string \"cat\" 3", data, 4),
 			new TestCase(null, "findAfter string \"cat\" 5", data, -1),
             new TestCase(null, "findAfter string \"dog\" 5", data, -1),
@@ -86,7 +86,7 @@ public class TestFunctionLibrary extends TestClass
             new TestCase(null, "format \"add %1$d here\" 4", data, "add 4 here"),
 			new TestCase(null, "format \"%1$d\" 5", data, "5"),
 			new TestCase(null, "length string", data, 22),
-			new TestCase(null, "lower \"MAT\"", data, "mat"),
+			new TestCase(null, "toLower \"MAT\"", data, "mat"),
 			new TestCase(null, "matches string \"[thecasonm ]*\"", data, true),
 			new TestCase(null, "matches string \"x*\"", data, false),
 			new TestCase(null, "replace string \"at\" \"is\"", data, "the cis sis on the mis"),
@@ -94,7 +94,13 @@ public class TestFunctionLibrary extends TestClass
 			new TestCase(null, "starts string \"the\"", data, true),
 			new TestCase(null, "starts string \"thy\"", data, false),
 			new TestCase(null, "substr string 4 7", data, "cat"),
-			new TestCase(null, "upper string", data, "THE CAT SAT ON THE MAT"),
+			new TestCase(null, "toUpper string", data, "THE CAT SAT ON THE MAT"),
+            new TestCase(
+                    new ArrayDataSet().put("testFunction", new ArrayDataSet()
+                            .put("arguments", "a b")
+                            .put("description", "add two numbers")
+                            .put("expression", "a + b"))
+                    , "testFunction 5 6", data, 11)
        };
     }
 
@@ -103,11 +109,16 @@ public class TestFunctionLibrary extends TestClass
     {
         TestCase testCase = (TestCase)arg;
         // Load the library
-        testCase.functionLibrary = FunctionLibrary.base();
         if (testCase.definition != null)
         {
-            testCase.functionLibrary.addFunctions(testCase.definition);
+            testCase.functionLibrary =
+                    new FunctionLibrary(testCase.definition);
         }
+        else
+        {
+            testCase.functionLibrary = FunctionLibrary.base();
+        }
+        
         testCase.expression = Expression.parse(
                 '[' + testCase.call + ']',
                 testCase.functionLibrary

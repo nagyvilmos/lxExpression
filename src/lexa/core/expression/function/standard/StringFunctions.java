@@ -31,19 +31,19 @@ public class StringFunctions
 		Function[] functions =
 		{
 			ends(),
-			find(),
+			findIn(),
 			findAfter(),
 			findBefore(),
 			findLast(),
 			format(),
 			length(),
-			lower(),
+			toLower(),
 			matches(),
 			replace(),
 			replaceFirst(),
 			starts(),
-			substring(),
-			upper()
+			substr(),
+			toUpper()
 		};
 
 		return functions;
@@ -51,7 +51,7 @@ public class StringFunctions
 
 	private static Function ends()
 	{
-		return new InternalFunction("string.ends", "string", "end")
+		return new InternalFunction("ends", "string", "end")
 		{
 			@Override
 			public String describe()
@@ -66,9 +66,9 @@ public class StringFunctions
 		};
 	}
 
-	private static Function find()
+	private static Function findIn()
 	{
-		return new InternalFunction("string.find", "string", "find")
+		return new InternalFunction("findIn", "string", "find")
 		{
 			@Override
 			public String describe()
@@ -84,7 +84,7 @@ public class StringFunctions
 	}
 	private static Function findAfter()
 	{
-		return new InternalFunction("string.findAfter", "string", "find", "start")
+		return new InternalFunction("findAfter", "string", "find", "start")
 		{
 			@Override
 			public String describe()
@@ -102,7 +102,7 @@ public class StringFunctions
 
 	private static Function findBefore()
 	{
-		return new InternalFunction("string.findBefore", "string", "find", "before")
+		return new InternalFunction("findBefore", "string", "find", "before")
 		{
 			@Override
 			public String describe()
@@ -120,7 +120,7 @@ public class StringFunctions
 
 	private static Function findLast()
 	{
-		return new InternalFunction("string.findLast", "string", "find")
+		return new InternalFunction("findLast", "string", "find")
 		{
 			@Override
 			public String describe()
@@ -138,7 +138,7 @@ public class StringFunctions
 	private static Function format()
 	{
 
-		return new InternalFunction("string.format", "string", "~")
+		return new InternalFunction("format", "string", "~")
 					// ~ the asteriks means 0 or many more args
 		{
 			@Override
@@ -164,7 +164,7 @@ public class StringFunctions
 
 	private static Function length()
 	{
-		return new InternalFunction("string.length", "string")
+		return new InternalFunction("length", "string")
 		{
 			@Override
 			public String describe()
@@ -179,9 +179,9 @@ public class StringFunctions
 		};
 	}
 
-	private static Function lower()
+	private static Function toLower()
 	{
-		return new InternalFunction("string.lower", "string")
+		return new InternalFunction("toLower", "string")
 		{
 			@Override
 			public String describe()
@@ -198,7 +198,7 @@ public class StringFunctions
 
 	private static Function matches()
 	{
-		return new InternalFunction("string.matches", "string", "regrxp")
+		return new InternalFunction("matches", "string", "regrxp")
 		{
 			@Override
 			public String describe()
@@ -215,7 +215,7 @@ public class StringFunctions
 
 	private static Function replace()
 	{
-		return new InternalFunction("string.replace", "string", "search", "replace")
+		return new InternalFunction("replace", "string", "search", "replace")
 		{
 			@Override
 			public String describe()
@@ -232,7 +232,7 @@ public class StringFunctions
 	}
 	private static Function replaceFirst()
 	{
-		return new InternalFunction("string.replaceFirst", "string", "search", "replace")
+		return new InternalFunction("replaceFirst", "string", "search", "replace")
 		{
 			@Override
 			public String describe()
@@ -250,7 +250,7 @@ public class StringFunctions
 
 	private static Function starts()
 	{
-		return new InternalFunction("string.starts", "string", "search")
+		return new InternalFunction("starts", "string", "search")
 		{
 			@Override
 			public String describe()
@@ -266,9 +266,9 @@ public class StringFunctions
 		};
 	}
 
-	private static Function substring()
+	private static Function substr()
 	{
-		return new InternalFunction("string.sub", "string", "start", "end")
+		return new InternalFunction("substr", "string", "start", "end")
 		{
 			@Override
 			public String describe()
@@ -284,9 +284,9 @@ public class StringFunctions
 		};
 	}
 
-	private static Function upper()
+	private static Function toUpper()
 	{
-		return new InternalFunction("string.upper", "string")
+		return new InternalFunction("toUpper", "string")
 		{
 			@Override
 			public String describe()
