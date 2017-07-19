@@ -52,7 +52,7 @@ public class DataFunctions
 	*/
 	private static Function dataClone()
 	{
-		return new InternalFunction("data.clone", "data")
+		return new InternalFunction("clone", "data")
 		{
 			@Override
 			public String describe()
@@ -77,7 +77,7 @@ public class DataFunctions
 	*/
 	private static Function contains()
 	{
-		return new InternalFunction("data.contains", "data", "key")
+		return new InternalFunction("contains", "data", "key")
 		{
 			@Override
 			public String describe()
@@ -98,26 +98,43 @@ public class DataFunctions
 
 	private static Function value()
 	{
-		return new InternalFunction("data.value", "data", "index")
+		return new InternalFunction("value", "data", "value")
 		{
 			@Override
 			public String describe()
 			{
-				return "find the value at index position in the data set";
+				return "find the value in the data set";
 			}
 			@Override
 			public Object execute(DataSet arguments)
 			{
-				return arguments.getDataSet("data")
-						.get(arguments.getInteger("index"))
-						.getObject();
+                DataItem val = arguments.get("value");
+                DataSet data = arguments.getDataSet("data");
+                if (data == null)
+                {
+                    return null;
+                }
+
+                DataItem ret = null;
+                switch (val.getType())
+                {
+                    case STRING     : {ret = data.get(val.getString());     break;}
+                    case INTEGER    : {ret = data.get(val.getInteger());    break;}
+                }
+
+                if (ret == null)
+                {
+    				return null;
+                }
+
+                return ret.getObject();
 			}
 		};
 	}
 
 	private static Function key()
 	{
-		return new InternalFunction("data.key", "data", "index")
+		return new InternalFunction("key", "data", "index")
 		{
 			@Override
 			public String describe()
@@ -159,7 +176,7 @@ public class DataFunctions
 
 	private static Function size()
 	{
-		return new InternalFunction("data.size", "data")
+		return new InternalFunction("size", "data")
 		{
 			@Override
 			public String describe()
@@ -182,11 +199,18 @@ public class DataFunctions
 			@Override
 			public String describe()
 			{
-				return "** UNDEFINED **";
+				return "Get the size of a data set, array or string";
 			}
 			@Override
 			public Object execute(DataSet arguments)
 			{
+                DataItem data = arguments.get("data");
+                switch (data.getType())
+                {
+                    case ARRAY      : return data.getArray().size();
+                    case DATA_SET   : return data.getDataSet().size();
+                    case STRING     : return data.getString().length();
+                }
 				return null;
 			}
 		};
