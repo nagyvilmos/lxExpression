@@ -1,18 +1,20 @@
-/*
- * ================================================================================
+/*==============================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * DataFunctions.java
- *--------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: September 2013
- *================================================================================
+ *==============================================================================
  */
 package lexa.core.expression.function.standard;
 
+import lexa.core.data.ArrayDataArray;
 import lexa.core.data.DataSet;
 import lexa.core.data.ArrayDataSet;
+import lexa.core.data.DataArray;
 import lexa.core.data.DataItem;
+import lexa.core.data.DataValue;
 import lexa.core.expression.function.Function;
 
 /**
@@ -36,38 +38,53 @@ public class DataFunctions
 			dataClone(),
 			contains(),
 			key(),
-			value(),
+			valueFunction(),
 			remove(),
 			size(),
-			map()
+			map(),
+            array(),
+            add()
 		};
 		return functions;
 	}
 
-	/**
-	A function to clone a {@link DataSet}.
-	<p>This is called using:
-	<pre>[data.clone name]</pre>
-	@return the clone function
-	*/
-	private static Function dataClone()
-	{
-		return new InternalFunction("clone", "data")
+    private static Function add()
+    {
+		return new InternalFunction("add", "array", "~")
 		{
 			@Override
 			public String describe()
 			{
-				return "clone the named data set";
+				return "add values to an array";
 			}
-
 			@Override
 			public Object execute(DataSet arguments)
 			{
-				return new ArrayDataSet(arguments.getDataSet("data"));
+                DataArray array = arguments.getArray("array");
+				Object value = arguments.getString("key");
+				return array.add(value);
 			}
-
 		};
-	}
+    }
+
+    private static Function array()
+    {
+		return new InternalFunction("array", "~")
+		{
+			@Override
+			public String describe()
+			{
+				return "create an array";
+			}
+			@Override
+			public Object execute(DataSet arguments)
+			{
+                DataArray array = new ArrayDataArray();
+				Object value = arguments.getString("key");
+				return array.add(value);
+			}
+		};
+    }
 
 	/**
 	A function to find if a dataset contains a key
@@ -96,39 +113,28 @@ public class DataFunctions
 		};
 	}
 
-	private static Function value()
+	/**
+	A function to clone a {@link DataSet}.
+	<p>This is called using:
+	<pre>[data.clone name]</pre>
+	@return the clone function
+	*/
+	private static Function dataClone()
 	{
-		return new InternalFunction("value", "data", "value")
+		return new InternalFunction("clone", "data")
 		{
 			@Override
 			public String describe()
 			{
-				return "find the value in the data set";
+				return "clone the named data set";
 			}
+
 			@Override
 			public Object execute(DataSet arguments)
 			{
-                DataItem val = arguments.get("value");
-                DataSet data = arguments.getDataSet("data");
-                if (data == null)
-                {
-                    return null;
-                }
-
-                DataItem ret = null;
-                switch (val.getType())
-                {
-                    case STRING     : {ret = data.get(val.getString());     break;}
-                    case INTEGER    : {ret = data.get(val.getInteger());    break;}
-                }
-
-                if (ret == null)
-                {
-    				return null;
-                }
-
-                return ret.getObject();
+				return new ArrayDataSet(arguments.getDataSet("data"));
 			}
+
 		};
 	}
 
@@ -147,6 +153,22 @@ public class DataFunctions
 				return arguments.getDataSet("data")
 						.get(arguments.getInteger("index"))
 						.getKey();
+			}
+		};
+	}
+	private static Function map()
+	{
+		return new InternalFunction("map", "data", "map")
+		{
+			@Override
+			public String describe()
+			{
+				return "** Not Implemented **";
+			}
+			@Override
+			public Object execute(DataSet arguments)
+			{
+                return null;
 			}
 		};
 	}
@@ -198,21 +220,54 @@ public class DataFunctions
 		};
 	}
 
-	private static Function map()
+    /**
+     * Get a value from a data set
+     * @param   data
+     *          data to search
+     * @param   value
+     *          the value required, either a string for the key
+     *          or integer for index.
+     * @return  the requested value or {@code null} if not present.
+     */
+    static Object value(DataSet data, DataValue value)
+    {
+        if (data == null)
+        {
+            return null;
+        }
+
+        DataItem ret = null;
+        switch (value.getType())
+        {
+            case STRING     : {ret = data.get(value.getString());     break;}
+            case INTEGER    : {ret = data.get(value.getInteger());    break;}
+        }
+
+        if (ret == null)
+        {
+            return null;
+        }
+
+        return ret.getObject();
+    }
+
+    private static Function valueFunction()
 	{
-		return new InternalFunction("map", "data", "map")
+		return new InternalFunction("value", "data", "value")
 		{
 			@Override
 			public String describe()
 			{
-				return "** Not Implemented **";
+				return "find the value in the data set";
 			}
 			@Override
 			public Object execute(DataSet arguments)
 			{
-                return null;
+                return DataFunctions.value(
+                    arguments.getDataSet("data"),
+                    arguments.getValue("value")
+                );
 			}
 		};
 	}
-
 }
