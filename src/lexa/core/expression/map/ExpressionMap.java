@@ -1,9 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/*==============================================================================
+ * Lexa - Property of William Norman-Walker
+ *------------------------------------------------------------------------------
+ * ExpressionMap.java (lxExpression)
+ *------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: July 2017
+ *==============================================================================
  */
-
 package lexa.core.expression.map;
 
 import java.util.*;
@@ -14,8 +17,9 @@ import lexa.core.expression.ExpressionException;
 import lexa.core.expression.function.FunctionLibrary;
 
 /**
- *
- * @author william
+ * A data set created using expressions.
+ * @author  william
+ * @since   2017-07
  */
 public class ExpressionMap
 {
@@ -23,10 +27,31 @@ public class ExpressionMap
 	private final Map<String,ExpressionMap> children;
 
     /**
-     *
-     * @param map
-     * @param library
-     * @throws ExpressionException
+     * Create a new expression map.
+     * <br>
+     * The map is built from the contents of the {@link DataSet}. The content
+     * may be either strings or embeded maps.
+     * @param   map
+     *          the definitions for the expression map
+     * @throws  ExpressionException
+     *          when an error occurs passing an expression.
+     */
+    public ExpressionMap(DataSet map) throws ExpressionException
+	{
+        this(map, FunctionLibrary.base());
+    }
+
+    /**
+     * Create a new expression map.
+     * <br>
+     * The map is built from the contents of the {@link DataSet}. The content
+     * may be either strings or embeded maps.
+     * @param   map
+     *          the definitions for the expression map
+     * @param   library
+     *          the library for evaluation the expressions
+     * @throws  ExpressionException
+     *          when an error occurs passing an expression.
      */
     public ExpressionMap(DataSet map, FunctionLibrary library) throws ExpressionException
 	{
@@ -54,7 +79,7 @@ public class ExpressionMap
 			}
 		}
 	}
-	
+
     /**
      *
      * @param key
@@ -77,4 +102,14 @@ public class ExpressionMap
 		}
 		return null; // nothing to do
 	}
+
+    String[] children()
+    {
+        throw new UnsupportedOperationException("ExpressionMap.children not supported yet.");
+    }
+
+    String[] fields()
+    {
+        throw new UnsupportedOperationException("ExpressionMap.fields not supported yet.");
+    }
 }

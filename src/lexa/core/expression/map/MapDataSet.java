@@ -1,9 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/*==============================================================================
+ * Lexa - Property of William Norman-Walker
+ *------------------------------------------------------------------------------
+ * ExpressionMap.java (lxExpression)
+ *------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: July 2017
+ *==============================================================================
  */
-
 package lexa.core.expression.map;
 
 import lexa.core.data.DataItem;
@@ -13,14 +16,20 @@ import lexa.core.data.ArrayDataSet;
 import lexa.core.expression.ExpressionException;
 
 /**
+ * A {@link DataSet} backed by an {@link ExpressionMap}.
+ * <br>
+ * If a field does not exist in the map then it will be evaluate from the
+ * provided expression map.
+ * Each field is evaluated once and only once.
  *
- * @author william
+ * @author  williamnw
+ * @since   2017-07
  */
 public class MapDataSet
 		extends ArrayDataSet
 {
 	private final ExpressionMap expressionMap;
-	
+
     /**
      *
      * @param expressionMap
@@ -41,18 +50,7 @@ public class MapDataSet
 		super(clone);
 		this.expressionMap = clone.expressionMap;
 	}
-	
-	@Override
-	public DataSet clone()
-	{
-		return new MapDataSet(this);
-	}
-	
-    /**
-     *
-     * @param key
-     * @return
-     */
+
     @Override
 	public synchronized DataItem get(String key)
 	{
@@ -70,11 +68,30 @@ public class MapDataSet
 		}
 		catch (ExpressionException ex)
 		{
-			ex.printStackTrace();
-			value = ex; // rather messy
+			value = null;
 		}
 		item = new ArrayDataItem(key,value);
 		this.put(item);
 		return item;
 	}
+
+    /**
+     * Evaluate all the expressions in the map.
+     * @return the result of all the evaluations
+     */
+    public DataSet evaluate()
+    {
+        DataSet data = new ArrayDataSet();
+
+        for (String field : this.expressionMap.fields())
+        {
+            data.put(this.get(field));
+        }
+        for (String child : this.expressionMap.children())
+        {
+            MapDataSet childData = (MapDataSet)this.getDataSet(child);
+            data.put(child, childData.evaluate());
+        }
+        return data;
+    }
 }
