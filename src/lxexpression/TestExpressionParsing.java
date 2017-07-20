@@ -1,7 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/*==============================================================================
+ * Lexa - Property of William Norman-Walker
+ *------------------------------------------------------------------------------
+ * TestExpressionParsing.java (lxExpression)
+ *------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: April 2017
+ *==============================================================================
  */
 package lxexpression;
 
@@ -16,6 +20,7 @@ import lexa.test.TestResult;
 /**
  * Test general expression parsing
  * @author william
+ * @since  2017-04
  */
 @TestAnnotation(
         arguments = "expressions")

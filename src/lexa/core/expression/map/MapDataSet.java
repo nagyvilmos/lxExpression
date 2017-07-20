@@ -77,6 +77,9 @@ public class MapDataSet
 
     /**
      * Evaluate all the expressions in the map.
+     * <br>
+     * Go through all the defined fields in the map and return their evaluated
+     * values.
      * @return the result of all the evaluations
      */
     public DataSet evaluate()
