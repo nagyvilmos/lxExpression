@@ -103,13 +103,13 @@ public class ExpressionMap
 		return null; // nothing to do
 	}
 
-    String[] children()
+    Set<String> children()
     {
-        throw new UnsupportedOperationException("ExpressionMap.children not supported yet.");
+        return this.children.keySet();
     }
 
-    String[] fields()
+    Set<String> fields()
     {
-        throw new UnsupportedOperationException("ExpressionMap.fields not supported yet.");
+        return this.expressions.keySet();
     }
 }
