@@ -1,6 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/*==============================================================================
+ * Lexa - Property of William Norman-Walker
+ *------------------------------------------------------------------------------
+ * ExpressionTokens.java (lxExpression)
+ *------------------------------------------------------------------------------
+ * Author:  William Norman-Walker
+ * Created: March 2013
+ *==============================================================================
  */
 package lexa.core.expression;
 
@@ -8,8 +13,9 @@ import java.util.Arrays;
 import lexa.core.expression.function.FunctionLibrary;
 
 /**
- *
- * @author william
+ * Tokenised string for parsing an expression
+ * @author  williamnw
+ * @since   2013-03
  */
 final class ExpressionTokens
 {
@@ -179,9 +185,9 @@ final class ExpressionTokens
 				(end >= this.words.length-1) ? this.words.length-2: end;
 		startPos = this.words[startPos];
 		endPos = this.words[endPos+1];
-		
+
 		return this.expressionText.substring(startPos, endPos);
-		
+
 	}
 
 	Expression expression()
@@ -227,4 +233,10 @@ final class ExpressionTokens
 	{
 		return this.getWord(this.getPointer());
 	}
+
+    @Override
+    public String toString()
+    {
+        return '{' + this.expressionText + "} @ {" + this.getWord() + '}';
+    }
 }
