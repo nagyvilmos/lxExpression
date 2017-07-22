@@ -61,8 +61,10 @@ public class TestFunctionLibrary extends TestClass
             new TestCase(null, "size string", data, 22),
             new TestCase(null, "array -3 -2 -1", data, new ArrayDataArray(-3, -2, -1)),
             new TestCase(null, "add array -1", data, new ArrayDataArray(1, 2, 3, -1)),
-            new TestCase(null, "add array -1 \"nowt\"", data, new ArrayDataArray(1, 2, 3, -1, "nowt")),
-            new TestCase(null, "join [array 0 1 2] [array 3 4]", data, new ArrayDataArray(0, 1, 2, 3, 4)),
+            new TestCase(null, "add array -1 \"nowt\"", data,
+                    new ArrayDataArray(1, 2, 3, -1, "nowt")),
+            new TestCase(null, "join [array 0 1 2] [array 3 4]", data,
+                    new ArrayDataArray(0, 1, 2, 3, 4)),
             // Maths library:
 			new TestCase(null, "cos num", data, 0.5403023058681398),
 			new TestCase(null, "pi num", data, 3.141592653589793),

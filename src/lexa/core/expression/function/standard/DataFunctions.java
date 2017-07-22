@@ -42,7 +42,7 @@ public class DataFunctions
 			remove(),
 			size(),
 			map(),
-            array(),
+            arrayFunction(),
             addFunction()
 		};
 		return functions;
@@ -80,7 +80,12 @@ public class DataFunctions
 		};
     }
 
-    private static Function array()
+    public static DataArray array(Object[] values)
+    {
+        return new ArrayDataArray(values);
+    }
+
+    private static Function arrayFunction()
     {
 		return new InternalFunction("array", "~")
 		{
@@ -90,11 +95,17 @@ public class DataFunctions
 				return "create an array";
 			}
 			@Override
-			public Object execute(DataSet arguments)
+			public DataArray execute(DataSet arguments)
 			{
-                DataArray array = new ArrayDataArray();
-				Object value = arguments.getString("key");
-				return array.add(value);
+
+                Object[] values = new Object[arguments.size()];
+				for (int i = 0;
+                     i < arguments.size();
+                        i++)
+                {
+                    values[i] = arguments.get(i).getObject();
+                }
+				return DataFunctions.array(values);
 			}
 		};
     }
