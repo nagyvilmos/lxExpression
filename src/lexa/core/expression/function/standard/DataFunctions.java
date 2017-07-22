@@ -11,14 +11,13 @@ package lexa.core.expression.function.standard;
 
 import lexa.core.data.ArrayDataArray;
 import lexa.core.data.DataSet;
-import lexa.core.data.ArrayDataSet;
 import lexa.core.data.DataArray;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataValue;
 import lexa.core.expression.function.Function;
 
 /**
- * Internal null reference handling functions.
+ * Internal data handling functions.
  * @author william
  * @since 2013-09
  */
@@ -27,28 +26,7 @@ public class DataFunctions
 
 	private DataFunctions() { }
 
-	/**
-     * Get the data functions
-	 * @return the data functions
-	 */
-	public static Function[] getFunctions()
-	{
-		Function[] functions =
-		{
-			dataClone(),
-			contains(),
-			key(),
-			valueFunction(),
-			remove(),
-			size(),
-			map(),
-            arrayFunction(),
-            addFunction()
-		};
-		return functions;
-	}
-
-    static DataArray add(DataArray array, Object ... values)
+    public static DataArray add(DataArray array, Object ... values)
     {
         if (values == null)
         {
@@ -110,13 +88,65 @@ public class DataFunctions
 		};
     }
 
+    public static DataArray cloneArray(DataArray array)
+    {
+        return array.factory().clone(array);
+    }
+
+    public static Object cloneDataSet(DataSet dataSet)
+    {
+        return dataSet.factory().clone(dataSet);
+    }
+
+	/**
+	A function to clone a {@link DataSet}.
+	<p>This is called using:
+	<pre>[data.clone name]</pre>
+	@return the clone function
+	*/
+	private static Function cloneFunction()
+	{
+		return new InternalFunction("clone", "data")
+		{
+			@Override
+			public String describe()
+			{
+				return "clone the named data set or array";
+			}
+
+			@Override
+			public Object execute(DataSet arguments)
+			{
+                DataItem item = arguments.get("data");
+                switch (item.getType()){
+                    case DATA_SET :
+                    {
+                        return DataFunctions.cloneDataSet(item.getDataSet());
+                    }
+                    case ARRAY :
+                    {
+                        return DataFunctions.cloneArray(item.getArray());
+                    }
+                }
+				return null;
+			}
+		};
+	}
+
+    public static Boolean contains(DataSet data, String key)
+    {
+        return data != null &&
+                key != null &&
+                data.contains(key);
+    }
+
 	/**
 	A function to find if a dataset contains a key
 	<p>This is called using:
 	<pre>[data.clone name key]</pre>
 	@return {@code true} if the item exists.
 	*/
-	private static Function contains()
+	private static Function containsFunction()
 	{
 		return new InternalFunction("contains", "data", "key")
 		{
@@ -126,43 +156,100 @@ public class DataFunctions
 				return "find if the data set contains the key";
 			}
 			@Override
-			public Object execute(DataSet arguments)
+			public Boolean execute(DataSet arguments)
 			{
 				DataSet data = arguments.getDataSet("data");
 				String key = arguments.getString("key");
-				return data != null &&
-						key != null &&
-						data.contains(key);
+                return DataFunctions.contains(data, key);
 			}
 		};
 	}
 
 	/**
-	A function to clone a {@link DataSet}.
-	<p>This is called using:
-	<pre>[data.clone name]</pre>
-	@return the clone function
-	*/
-	private static Function dataClone()
+     * Get the data functions
+	 * @return the data functions
+	 */
+	public static Function[] getFunctions()
 	{
-		return new InternalFunction("clone", "data")
+		Function[] functions =
+		{
+	        addFunction(),
+	        arrayFunction(),
+    		cloneFunction(),
+			containsFunction(),
+            joinFunction(),
+			keyFunction(),
+			mapFunction(),
+			removeFunction(),
+			sizeFunction(),
+			valueFunction()
+    	};
+		return functions;
+	}
+
+    public static DataArray joinArray(DataArray first, DataArray second)
+    {
+        DataArray joined = first.factory().clone(first);
+        if (second != null)
+        {
+            joined.addAll(second);
+        }
+        return joined;
+    }
+
+    public static DataSet joinDataSet(DataSet first, DataSet second)
+    {
+        DataSet joined = first.factory().clone(first);
+        if (second != null)
+        {
+            joined.put(second);
+        }
+        return joined;
+    }
+
+    private static Function joinFunction()
+	{
+		return new InternalFunction("join", "first", "second")
 		{
 			@Override
 			public String describe()
 			{
-				return "clone the named data set";
+				return "join two data sets or arrays";
 			}
 
 			@Override
 			public Object execute(DataSet arguments)
 			{
-				return new ArrayDataSet(arguments.getDataSet("data"));
+                DataItem first = arguments.get("first");
+                DataItem second = arguments.get("second");
+                switch (first.getType()){
+                    case DATA_SET :
+                    {
+                        return DataFunctions.joinDataSet(
+                                first.getDataSet(),
+                                second.getDataSet()
+                        );
+                    }
+                    case ARRAY :
+                    {
+                        return DataFunctions.joinArray(
+                                first.getArray(),
+                                second.getArray()
+                        );
+                    }
+                }
+				return null;
 			}
-
 		};
 	}
 
-	private static Function key()
+    public static String key(DataSet data, Integer index)
+    {
+        return data != null && index != null ?
+                data.get(index).getKey() :
+                null;
+    }
+	private static Function keyFunction()
 	{
 		return new InternalFunction("key", "data", "index")
 		{
@@ -172,15 +259,17 @@ public class DataFunctions
 				return "find the key at index position in the data set";
 			}
 			@Override
-			public Object execute(DataSet arguments)
+			public String execute(DataSet arguments)
 			{
-				return arguments.getDataSet("data")
-						.get(arguments.getInteger("index"))
-						.getKey();
+				return DataFunctions.key(
+                        arguments.getDataSet("data"),
+						arguments.getInteger("index")
+                );
 			}
 		};
 	}
-	private static Function map()
+
+	private static Function mapFunction()
 	{
 		return new InternalFunction("map", "data", "map")
 		{
@@ -197,7 +286,17 @@ public class DataFunctions
 		};
 	}
 
-	private static Function remove()
+    public static Object remove(DataSet data, String key)
+    {
+        DataItem removed = data.remove(key);
+        // return the value's object not the item.
+        // expressions NEVER handle DataValue objects.
+        return removed != null ?
+                removed.getObject() :
+                null;
+    }
+
+	private static Function removeFunction()
 	{
 		return new InternalFunction("remove", "data", "key")
 		{
@@ -209,20 +308,31 @@ public class DataFunctions
 			@Override
 			public Object execute(DataSet arguments)
 			{
-                DataItem removed = arguments.getDataSet("data")
-						.remove(arguments.getString("key"));
-                // return the value's object not the item.
-                // expressions NEVER handle DataValue objects.
-                return removed != null ?
-                        removed.getObject() :
-                        null;
+                return DataFunctions.remove(
+                        arguments.getDataSet("data"),
+						arguments.getString("key")
+                );
 			}
 		};
 	}
 
-	private static Function size()
+    private static Integer size(DataItem item)
+    {
+        if (item != null)
+        {
+            switch (item.getType())
+            {
+                case ARRAY      : return item.getArray().size();
+                case DATA_SET   : return item.getDataSet().size();
+                case STRING     : return item.getString().length();
+            }
+        }
+        return null;
+    }
+
+	private static Function sizeFunction()
 	{
-		return new InternalFunction("size", "data")
+		return new InternalFunction("size", "item")
         {
             @Override
 			public String describe()
@@ -230,16 +340,9 @@ public class DataFunctions
 				return "Get the size of a data set, array or string";
 			}
 			@Override
-			public Object execute(DataSet arguments)
+			public Integer execute(DataSet arguments)
 			{
-                DataItem data = arguments.get("data");
-                switch (data.getType())
-                {
-                    case ARRAY      : return data.getArray().size();
-                    case DATA_SET   : return data.getDataSet().size();
-                    case STRING     : return data.getString().length();
-                }
-				return null;
+                return DataFunctions.size(arguments.get("item"));
 			}
 		};
 	}
@@ -263,16 +366,10 @@ public class DataFunctions
         DataItem ret = null;
         switch (value.getType())
         {
-            case STRING     : {ret = data.get(value.getString());     break;}
-            case INTEGER    : {ret = data.get(value.getInteger());    break;}
+            case STRING     : return data.getObject(value.getString());
+            case INTEGER    : return data.get(value.getInteger()).getObject();
         }
-
-        if (ret == null)
-        {
-            return null;
-        }
-
-        return ret.getObject();
+        return null;
     }
 
     private static Function valueFunction()
