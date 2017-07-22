@@ -33,8 +33,7 @@ public class Value
 		{
 			case SUBTRACT:
 			{
-				Element.element(tokens.next());
-				tokens.setExpression(new Negative(tokens.expression()));
+                Negative.negative(tokens.next());
 				return;
 			}
 			case NOT:
@@ -69,8 +68,8 @@ public class Value
 
     /**
      * Evaluation the element.
-	 * 
-     * <p>Retrieve the item referenced by the return of evaluating the expression parameter. 
+	 *
+     * <p>Retrieve the item referenced by the return of evaluating the expression parameter.
      * @param data  The input to feed the expression.
      * @return The result of the evaluation
      * @throws ExpressionException when an error occurs in evaluation the expression

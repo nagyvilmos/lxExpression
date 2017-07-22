@@ -1,17 +1,11 @@
-/*
- * ================================================================================
+/*==============================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
- * Negative.java
- *--------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
+ * Negative.java (lxExpression)
+ *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: March 2013
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * DD-MON-YY    ??
- *================================================================================
+ *==============================================================================
  */
 package lexa.core.expression;
 
@@ -57,5 +51,16 @@ public class Negative extends Expression {
             return -(Double)object;
         }
         throw new ExpressionException("Value not a number.");
+    }
+
+    static void negative(ExpressionTokens tokens)
+            throws ExpressionException
+    {
+        Element.element(tokens);
+        tokens.setExpression(
+                new Negative(
+                        tokens.expression()
+                )
+        );
     }
 }
