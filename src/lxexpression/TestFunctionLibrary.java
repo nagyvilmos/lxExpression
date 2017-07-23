@@ -10,6 +10,7 @@
 
 package lxexpression;
 
+import java.util.*;
 import lexa.core.data.ArrayDataArray;
 import lexa.core.data.ArrayDataSet;
 import lexa.core.data.DataSet;
@@ -47,8 +48,8 @@ public class TestFunctionLibrary extends TestClass
                     .add(3)
         );
 
-        return new TestCase[] {
-            // Data library:
+        TestCase[] tests = new TestCase[] {
+            // Data library: [0]
             new TestCase(null, "clone data", data, data.getDataSet("data")),
             new TestCase(null, "contains data \"a\"", data, true),
             new TestCase(null, "contains data \"c\"", data, false),
@@ -59,6 +60,7 @@ public class TestFunctionLibrary extends TestClass
             new TestCase(null, "size data", data, 2),
             new TestCase(null, "size array", data, 3),
             new TestCase(null, "size string", data, 22),
+            // [10]
             new TestCase(null, "array -3 -2 -1", data, new ArrayDataArray(-3, -2, -1)),
             new TestCase(null, "add array -1", data, new ArrayDataArray(1, 2, 3, -1)),
             new TestCase(null, "add array -1 \"nowt\"", data,
@@ -72,6 +74,7 @@ public class TestFunctionLibrary extends TestClass
 			new TestCase(null, "tan num", data, 1.5574077246549023),
             new TestCase(null, "isNull data.a", data, false),
             new TestCase(null, "isNull data.c", data, true),
+            // [20]
             // null handling
 			new TestCase(null, "null", data, null),
 			new TestCase(null, "nullValue data.b 4", data, 2),
@@ -84,6 +87,7 @@ public class TestFunctionLibrary extends TestClass
 			new TestCase(null, "findAfter string \"cat\" 3", data, 4),
 			new TestCase(null, "findAfter string \"cat\" 5", data, -1),
             new TestCase(null, "findAfter string \"dog\" 5", data, -1),
+            // [30]
 			new TestCase(null, "findBefore string \"cat\" 3", data, -1),
 			new TestCase(null, "findBefore string \"cat\" 8", data, 4),
             new TestCase(null, "findBefore string \"dog\" 5", data, -1),
@@ -94,6 +98,7 @@ public class TestFunctionLibrary extends TestClass
 			new TestCase(null, "length string", data, 22),
 			new TestCase(null, "toLower \"MAT\"", data, "mat"),
 			new TestCase(null, "matches string \"[thecasonm ]*\"", data, true),
+            // [40]
 			new TestCase(null, "matches string \"x*\"", data, false),
 			new TestCase(null, "replace string \"at\" \"is\"", data, "the cis sis on the mis"),
 			new TestCase(null, "replaceFirst string \"at\" \"is\"", data, "the cis sat on the mat"),
@@ -107,7 +112,10 @@ public class TestFunctionLibrary extends TestClass
                             .put("description", "add two numbers")
                             .put("expression", "a + b"))
                     , "testFunction 5 6", data, 11)
-       };
+
+       };   // [48]
+        return Arrays.copyOfRange(tests, 10, 13);
+        //return tests;
     }
 
     public TestResult setUpFunctionCall(Object arg)
