@@ -27,21 +27,28 @@ import lexa.test.TestRun;
 public class ExpressionTest {
 
     /**
+     * Test the expression engine
      *
-     * @param args
+     * <p>If an argument is provided then the file is tested other wise this
+     * runs a standard set of tests for the expressions engine.
+     *
+     * @param args the name of the test file if required.
      */
     public static void main(String ... args)
     {
-        TestClass[] tests = new TestClass[]
-        {
-            new TestExpressionParsing(),
-            new TestFunctionLibrary(),
-            new TestMappedData(),
-            new TestExpressionScript(
-                    (args != null && args.length > 0) ?
-                            args[0] :
-                            "test.expression.lexa")
-        };
+        TestClass[] tests = args != null ?
+                new TestClass[]
+                {
+                    new TestExpressionScript(args[0])
+                } :
+                new TestClass[]
+                {
+                    new TestExpressionParsing(),
+                    new TestFunctionLibrary(),
+                    new TestMappedData(),
+                     new TestExpressionScript("test.expression.lexa")
+                };
+
         System.out.println(
                 new TestRun(tests)
                         .execute()
