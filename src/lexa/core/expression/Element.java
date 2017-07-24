@@ -56,7 +56,7 @@ public class Element
 			}
 			case START_FUNCTION:
 			{
-				FunctionCall.function(tokens);
+				Function.function(tokens);
 				break;
 			}
 			default:

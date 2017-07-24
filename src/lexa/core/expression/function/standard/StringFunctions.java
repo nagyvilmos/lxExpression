@@ -11,7 +11,7 @@
 package lexa.core.expression.function.standard;
 
 import lexa.core.data.DataSet;
-import lexa.core.expression.function.Function;
+import lexa.core.expression.function.FunctionDefinition;
 
 /**
  * Internal string handling functions.
@@ -26,9 +26,9 @@ public class StringFunctions
      * Get the internal string handling functions
      * @return an array of functions.
      */
-    public static Function[] getFunctions()
+    public static FunctionDefinition[] getFunctions()
 	{
-		Function[] functions =
+		FunctionDefinition[] functions =
 		{
 			ends(),
 			findIn(),
@@ -49,7 +49,7 @@ public class StringFunctions
 		return functions;
 	}
 
-	private static Function ends()
+	private static FunctionDefinition ends()
 	{
 		return new InternalFunction("ends", "string", "end")
 		{
@@ -66,7 +66,7 @@ public class StringFunctions
 		};
 	}
 
-	private static Function findIn()
+	private static FunctionDefinition findIn()
 	{
 		return new InternalFunction("findIn", "string", "find")
 		{
@@ -82,7 +82,7 @@ public class StringFunctions
 			}
 		};
 	}
-	private static Function findAfter()
+	private static FunctionDefinition findAfter()
 	{
 		return new InternalFunction("findAfter", "string", "find", "start")
 		{
@@ -100,7 +100,7 @@ public class StringFunctions
 		};
 	}
 
-	private static Function findBefore()
+	private static FunctionDefinition findBefore()
 	{
 		return new InternalFunction("findBefore", "string", "find", "before")
 		{
@@ -118,7 +118,7 @@ public class StringFunctions
 		};
 	}
 
-	private static Function findLast()
+	private static FunctionDefinition findLast()
 	{
 		return new InternalFunction("findLast", "string", "find")
 		{
@@ -135,7 +135,7 @@ public class StringFunctions
 		};
 	}
 
-	private static Function format()
+	private static FunctionDefinition format()
 	{
 
 		return new InternalFunction("format", "string", "~")
@@ -162,7 +162,7 @@ public class StringFunctions
 		};
 	}
 
-	private static Function length()
+	private static FunctionDefinition length()
 	{
 		return new InternalFunction("length", "string")
 		{
@@ -179,7 +179,7 @@ public class StringFunctions
 		};
 	}
 
-	private static Function toLower()
+	private static FunctionDefinition toLower()
 	{
 		return new InternalFunction("toLower", "string")
 		{
@@ -196,7 +196,7 @@ public class StringFunctions
 		};
 	}
 
-	private static Function matches()
+	private static FunctionDefinition matches()
 	{
 		return new InternalFunction("matches", "string", "regrxp")
 		{
@@ -213,7 +213,7 @@ public class StringFunctions
 		};
 	}
 
-	private static Function replace()
+	private static FunctionDefinition replace()
 	{
 		return new InternalFunction("replace", "string", "search", "replace")
 		{
@@ -230,7 +230,7 @@ public class StringFunctions
 			}
 		};
 	}
-	private static Function replaceFirst()
+	private static FunctionDefinition replaceFirst()
 	{
 		return new InternalFunction("replaceFirst", "string", "search", "replace")
 		{
@@ -248,7 +248,7 @@ public class StringFunctions
 		};
 	}
 
-	private static Function starts()
+	private static FunctionDefinition starts()
 	{
 		return new InternalFunction("starts", "string", "search")
 		{
@@ -266,7 +266,7 @@ public class StringFunctions
 		};
 	}
 
-	private static Function substr()
+	private static FunctionDefinition substr()
 	{
 		return new InternalFunction("substr", "string", "start", "end")
 		{
@@ -284,7 +284,7 @@ public class StringFunctions
 		};
 	}
 
-	private static Function toUpper()
+	private static FunctionDefinition toUpper()
 	{
 		return new InternalFunction("toUpper", "string")
 		{

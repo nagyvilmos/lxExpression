@@ -11,7 +11,7 @@
 package lexa.core.expression.function.standard;
 
 import lexa.core.data.DataSet;
-import lexa.core.expression.function.Function;
+import lexa.core.expression.function.FunctionDefinition;
 
 /**
  * Internal mathematical functions.
@@ -26,9 +26,9 @@ public class MathsFunctions
      * Get the internal mathematical functions
      * @return an array of functions.
      */
-    public static Function[] getFunctions()
+    public static FunctionDefinition[] getFunctions()
 	{
-		Function[] functions =
+		FunctionDefinition[] functions =
 		{
 			cos(),
 			pi(),
@@ -39,7 +39,7 @@ public class MathsFunctions
 		return functions;
 	}
 
-	private static Function cos()
+	private static FunctionDefinition cos()
 	{
 		return new InternalFunction("cos", "degrees")
 		{
@@ -57,7 +57,7 @@ public class MathsFunctions
 
 	}
 
-	private static Function pi()
+	private static FunctionDefinition pi()
 	{
 		return new InternalFunction("pi")
 		{
@@ -74,7 +74,7 @@ public class MathsFunctions
 		};
 	}
 
-	private static Function sin()
+	private static FunctionDefinition sin()
 	{
 		return new InternalFunction("sin", "degrees")
 		{
@@ -92,7 +92,7 @@ public class MathsFunctions
 
 	}
 
-	private static Function tan()
+	private static FunctionDefinition tan()
 	{
 		return new InternalFunction("tan", "degrees")
 		{

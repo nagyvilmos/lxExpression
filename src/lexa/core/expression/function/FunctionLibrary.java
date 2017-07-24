@@ -67,7 +67,7 @@ public final class FunctionLibrary
 	/** indicates if this is the base library */
 	private final boolean baseLibrary;
 	/** Functions supported by this library */
-	private final Map<String, Function> functions;
+	private final Map<String, FunctionDefinition> functions;
 
 	private FunctionLibrary()
 			throws ExpressionException
@@ -153,7 +153,7 @@ public final class FunctionLibrary
      */
 
 
-	public final void addFunction(Function function)
+	public final void addFunction(FunctionDefinition function)
 			throws ExpressionException
 	{
 		if (this.baseLibrary)
@@ -201,13 +201,13 @@ public final class FunctionLibrary
      * @return
      * @throws ExpressionException
      */
-    public final Function getFunction(String name)
+    public final FunctionDefinition getFunction(String name)
 			throws ExpressionException
 	{
 		if (name == null || "".equals(name)) {
 			throw new ExpressionException("Function name missing");
 		}
-		Function f = this.functions.get(name);
+		FunctionDefinition f = this.functions.get(name);
 		if (f != null)
 		{
 			return f;
@@ -230,10 +230,10 @@ public final class FunctionLibrary
 		this.loadInternalFunctions(StringFunctions.getFunctions());
 	}
 
-	private void loadInternalFunctions(Function[] functions)
+	private void loadInternalFunctions(FunctionDefinition[] functions)
 			throws ExpressionException
 	{
-        for (Function function : functions)
+        for (FunctionDefinition function : functions)
         {
             this.addFunction(function);
         }

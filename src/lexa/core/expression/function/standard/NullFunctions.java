@@ -12,7 +12,7 @@ package lexa.core.expression.function.standard;
 
 import lexa.core.data.DataSet;
 import lexa.core.expression.ExpressionException;
-import lexa.core.expression.function.Function;
+import lexa.core.expression.function.FunctionDefinition;
 
 /**
  * Internal null reference handling functions.
@@ -27,16 +27,16 @@ public class NullFunctions
      * Get the internal null reference handling functions
      * @return an array of functions.
      */
-    public static Function[] getFunctions()
+    public static FunctionDefinition[] getFunctions()
 	{
-		return new Function[]{
+		return new FunctionDefinition[]{
 			isNull(),
 			nullFunction(),
 			nullValue()
 		};
 	}
 
-	private static Function isNull()
+	private static FunctionDefinition isNull()
 	{
 		return new InternalFunction("isNull","value")
 		{
@@ -54,7 +54,7 @@ public class NullFunctions
 			}
 		};
 	}
-	private static Function nullFunction()
+	private static FunctionDefinition nullFunction()
 	{
 		return new InternalFunction("null")
 		{
@@ -70,7 +70,7 @@ public class NullFunctions
 			}
 		};
 	}
-	private static Function nullValue()
+	private static FunctionDefinition nullValue()
 	{
 		return new InternalFunction("nullValue", "value","whenNull")
 		{

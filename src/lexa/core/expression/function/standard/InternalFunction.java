@@ -11,7 +11,7 @@
 package lexa.core.expression.function.standard;
 
 import lexa.core.expression.ExpressionException;
-import lexa.core.expression.function.Function;
+import lexa.core.expression.function.FunctionDefinition;
 import lexa.core.expression.function.FunctionLibrary;
 
 /**
@@ -20,7 +20,7 @@ import lexa.core.expression.function.FunctionLibrary;
  * @since 2013-09
  */
 public abstract class InternalFunction
-		extends Function
+		extends FunctionDefinition
 {
 
     /**

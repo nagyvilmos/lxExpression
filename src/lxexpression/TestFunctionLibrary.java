@@ -114,7 +114,7 @@ public class TestFunctionLibrary extends TestClass
                     , "testFunction 5 6", data, 11)
 
        };   // [48]
-        return Arrays.copyOfRange(tests, 10, 13);
+        return Arrays.copyOfRange(tests, 10, 14);
         //return tests;
     }
 

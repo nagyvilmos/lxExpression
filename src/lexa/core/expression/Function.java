@@ -6,7 +6,7 @@
 package lexa.core.expression;
 
 import lexa.core.expression.function.FunctionLibrary;
-import lexa.core.expression.function.Function;
+import lexa.core.expression.function.FunctionDefinition;
 import java.util.ArrayList;
 import java.util.Arrays;
 import lexa.core.data.DataSet;
@@ -16,7 +16,7 @@ import lexa.core.data.DataSet;
  * @author William
  * @since YYYY-MM
  */
-public class FunctionCall
+public class Function
         extends Expression {
 
 	static void function(ExpressionTokens tokens)
@@ -50,13 +50,13 @@ public class FunctionCall
 		{
 			throw new ExpressionException("Missing end of function for " + name + '\n' + tokens.getPhrase(start,start + 2));
 		}
-		tokens.setExpression(new FunctionCall(tokens.getLibrary(), name, args));
+		tokens.setExpression(new Function(tokens.getLibrary(), name, args));
 		tokens.next();
 	}
 
-    private final Function function;
+    private final FunctionDefinition function;
     private final Expression[] argumentExpressions;
-    FunctionCall(FunctionLibrary library, String name, ArrayList<Expression> args)
+    Function(FunctionLibrary library, String name, ArrayList<Expression> args)
 			throws ExpressionException
 	{
         this.function = library.getFunction(name);

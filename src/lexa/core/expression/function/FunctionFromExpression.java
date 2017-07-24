@@ -21,7 +21,7 @@ import lexa.core.expression.ExpressionException;
 
 
 class FunctionFromExpression
-        extends Function {
+        extends FunctionDefinition {
     private static final String ARGUMENTS = "arguments";
     private static final String DESCRIPTION = "description";
     private static final String EXPRESSION = "expression";

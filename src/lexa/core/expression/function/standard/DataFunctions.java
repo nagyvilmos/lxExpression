@@ -14,7 +14,7 @@ import lexa.core.data.DataSet;
 import lexa.core.data.DataArray;
 import lexa.core.data.DataItem;
 import lexa.core.data.DataValue;
-import lexa.core.expression.function.Function;
+import lexa.core.expression.function.FunctionDefinition;
 
 /**
  * Internal data handling functions.
@@ -39,7 +39,7 @@ public class DataFunctions
         return array.addAll(values);
     }
 
-    private static Function addFunction()
+    private static FunctionDefinition addFunction()
     {
 		return new InternalFunction("add", "array", "~")
 		{
@@ -63,7 +63,7 @@ public class DataFunctions
         return new ArrayDataArray(values);
     }
 
-    private static Function arrayFunction()
+    private static FunctionDefinition arrayFunction()
     {
 		return new InternalFunction("array", "~")
 		{
@@ -104,7 +104,7 @@ public class DataFunctions
 	<pre>[data.clone name]</pre>
 	@return the clone function
 	*/
-	private static Function cloneFunction()
+	private static FunctionDefinition cloneFunction()
 	{
 		return new InternalFunction("clone", "data")
 		{
@@ -146,7 +146,7 @@ public class DataFunctions
 	<pre>[data.clone name key]</pre>
 	@return {@code true} if the item exists.
 	*/
-	private static Function containsFunction()
+	private static FunctionDefinition containsFunction()
 	{
 		return new InternalFunction("contains", "data", "key")
 		{
@@ -169,9 +169,9 @@ public class DataFunctions
      * Get the data functions
 	 * @return the data functions
 	 */
-	public static Function[] getFunctions()
+	public static FunctionDefinition[] getFunctions()
 	{
-		Function[] functions =
+		FunctionDefinition[] functions =
 		{
 	        addFunction(),
 	        arrayFunction(),
@@ -207,7 +207,7 @@ public class DataFunctions
         return joined;
     }
 
-    private static Function joinFunction()
+    private static FunctionDefinition joinFunction()
 	{
 		return new InternalFunction("join", "first", "second")
 		{
@@ -249,7 +249,7 @@ public class DataFunctions
                 data.get(index).getKey() :
                 null;
     }
-	private static Function keyFunction()
+	private static FunctionDefinition keyFunction()
 	{
 		return new InternalFunction("key", "data", "index")
 		{
@@ -269,7 +269,7 @@ public class DataFunctions
 		};
 	}
 
-	private static Function mapFunction()
+	private static FunctionDefinition mapFunction()
 	{
 		return new InternalFunction("map", "data", "map")
 		{
@@ -296,7 +296,7 @@ public class DataFunctions
                 null;
     }
 
-	private static Function removeFunction()
+	private static FunctionDefinition removeFunction()
 	{
 		return new InternalFunction("remove", "data", "key")
 		{
@@ -330,7 +330,7 @@ public class DataFunctions
         return null;
     }
 
-	private static Function sizeFunction()
+	private static FunctionDefinition sizeFunction()
 	{
 		return new InternalFunction("size", "item")
         {
@@ -372,7 +372,7 @@ public class DataFunctions
         return null;
     }
 
-    private static Function valueFunction()
+    private static FunctionDefinition valueFunction()
 	{
 		return new InternalFunction("value", "data", "value")
 		{

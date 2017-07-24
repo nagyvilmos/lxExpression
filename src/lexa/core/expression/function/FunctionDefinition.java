@@ -2,7 +2,7 @@
  * ================================================================================
  * Lexa - Property of William Norman-Walker
  * --------------------------------------------------------------------------------
- * Function.java
+ * FunctionDefinition.java
  *--------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: September 2013
@@ -21,7 +21,7 @@ import lexa.core.expression.ExpressionException;
  * @author William
  * @since 2013-09
  */
-public abstract class Function {
+public abstract class FunctionDefinition {
 
 	/** the name of the function */
     private final String name;
@@ -37,7 +37,7 @@ public abstract class Function {
 	 * @param name the name of the function.
 	 * @param arguments space separated list of arguments for the function.
 	 */
-    public Function(String name, String arguments) {
+    public FunctionDefinition(String name, String arguments) {
         this(name,
                 arguments == null ?
                         null :
@@ -52,7 +52,7 @@ public abstract class Function {
 	 * @param name the name of the function.
 	 * @param arguments a list of arguments for the function.
 	 */
-	public Function(String name, String ... arguments) {
+	public FunctionDefinition(String name, String ... arguments) {
         this.name = name;
         this.arguments = arguments;
 		String f = '[' + name;
@@ -138,7 +138,7 @@ public abstract class Function {
 	@param arguments argument data for the function
 	@return the result of the function
 	@throws ExpressionException when the evaluation fails
-	@see Function#execute(lexa.core.data.DataSet)
+	@see FunctionDefinition#execute(lexa.core.data.DataSet)
 	*/
     public Object evaluate(DataSet arguments)
             throws ExpressionException {
