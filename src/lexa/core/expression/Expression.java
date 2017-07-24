@@ -148,7 +148,7 @@ public static Expression parse(String expressionText, FunctionLibrary library)
 			throws ExpressionException
 	{
 		ExpressionTokens tokens = new ExpressionTokens(expressionText, library);
-		expression(tokens);
+		Expression.expression(tokens);
 		if (!tokens.done())
 		{
 			int p = tokens.getPointer();
