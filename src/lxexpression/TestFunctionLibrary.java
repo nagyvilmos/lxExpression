@@ -32,7 +32,7 @@ public class TestFunctionLibrary extends TestClass
     {
     }
 
-    public Object[] argumentsFunctionCall()
+    public Object[] testFucntions()
     {
         DataSet data = new ArrayDataSet()
                 .put("data",
@@ -55,11 +55,12 @@ public class TestFunctionLibrary extends TestClass
             new TestCase(null, "key data 1", data, "b"),
             new TestCase(null, "value data 0", data, 1),
             new TestCase(null, "remove data \"b\"", data, 2),
+            new TestCase(null, "remove data 2", data, 2),
             new TestCase(null, "map data map", data, null),
             new TestCase(null, "size data", data, 2),
             new TestCase(null, "size array", data, 3),
-            new TestCase(null, "size string", data, 22),
             // [10]
+            new TestCase(null, "size string", data, 22),
             new TestCase(null, "array -3 -2 -1", data, new ArrayDataArray(-3, -2, -1)),
             new TestCase(null, "add array -1", data, new ArrayDataArray(1, 2, 3, -1)),
             new TestCase(null, "add array -1 \"nowt\"", data,
@@ -72,8 +73,8 @@ public class TestFunctionLibrary extends TestClass
 			new TestCase(null, "sin num", data, 0.8414709848078965),
 			new TestCase(null, "tan num", data, 1.5574077246549023),
             new TestCase(null, "isNull data.a", data, false),
-            new TestCase(null, "isNull data.c", data, true),
             // [20]
+            new TestCase(null, "isNull data.c", data, true),
             // null handling
 			new TestCase(null, "null", data, null),
 			new TestCase(null, "nullValue data.b 4", data, 2),
@@ -85,8 +86,8 @@ public class TestFunctionLibrary extends TestClass
 			new TestCase(null, "findIn string \"dog\"", data, -1),
 			new TestCase(null, "findAfter string \"cat\" 3", data, 4),
 			new TestCase(null, "findAfter string \"cat\" 5", data, -1),
-            new TestCase(null, "findAfter string \"dog\" 5", data, -1),
             // [30]
+            new TestCase(null, "findAfter string \"dog\" 5", data, -1),
 			new TestCase(null, "findBefore string \"cat\" 3", data, -1),
 			new TestCase(null, "findBefore string \"cat\" 8", data, 4),
             new TestCase(null, "findBefore string \"dog\" 5", data, -1),
@@ -96,8 +97,8 @@ public class TestFunctionLibrary extends TestClass
 			new TestCase(null, "format \"%1$d\" 5", data, "5"),
 			new TestCase(null, "length string", data, 22),
 			new TestCase(null, "toLower \"MAT\"", data, "mat"),
-			new TestCase(null, "matches string \"[thecasonm ]*\"", data, true),
             // [40]
+			new TestCase(null, "matches string \"[thecasonm ]*\"", data, true),
 			new TestCase(null, "matches string \"x*\"", data, false),
 			new TestCase(null, "replace string \"at\" \"is\"", data, "the cis sis on the mis"),
 			new TestCase(null, "replaceFirst string \"at\" \"is\"", data, "the cis sat on the mat"),
@@ -112,7 +113,7 @@ public class TestFunctionLibrary extends TestClass
                             .put("expression", "a + b"))
                     , "testFunction 5 6", data, 11)
 
-       };   // [48]
+       };   // [49]
         //return Arrays.copyOfRange(tests, 10, 14);
         return tests;
     }
@@ -146,7 +147,7 @@ public class TestFunctionLibrary extends TestClass
         );
     }
 
-    @TestAnnotation(arguments = "argumentsFunctionCall",
+    @TestAnnotation(arguments = "testFucntions",
             setUp = "setUpFunctionCall")
     public TestResult functionCall(Object arg)
             throws ExpressionException

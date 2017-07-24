@@ -24,8 +24,22 @@ import lexa.core.expression.function.FunctionDefinition;
 public class DataFunctions
 {
 
+    /** private constructor for static class */
 	private DataFunctions() { }
 
+    /**
+     * Implementation of the add function.
+     * <p>
+     * Add a series of values to a {@link DataArray}.
+     * If the array does not exist then a new array is created with the values
+     * and if no values are provided then the original array is returned.
+     *
+     * @param   array
+     *          an array to add values to.
+     * @param   values
+     *          the values to add to the array
+     * @return  the array with the values added.
+     */
     public static DataArray add(DataArray array, Object ... values)
     {
         if (values == null)
@@ -64,6 +78,15 @@ public class DataFunctions
 		};
     }
 
+    /**
+     * Implementation of the array function.
+     * <p>
+     * Create a {@link DataArray} from a set of values
+     *
+     * @param   values
+     *          the values to make into an array
+     * @return  the array with all the values.
+     */
     public static DataArray array(Object ... values)
     {
         return new ArrayDataArray(values);
@@ -94,11 +117,29 @@ public class DataFunctions
 		};
     }
 
+    /**
+     * Implementation of the clone function for an array.
+     * <p>
+     * Create a clone of a {@link DataArray}
+     *
+     * @param   array
+     *          the array to clone
+     * @return  a clone of the original array
+     */
     public static DataArray cloneArray(DataArray array)
     {
         return array.factory().clone(array);
     }
 
+    /**
+     * Implementation of the clone function for a data set.
+     * <p>
+     * Create a clone of a {@link DataSet}
+     *
+     * @param   dataSet
+     *          the data set to clone
+     * @return  a clone of the original data set
+     */
     public static Object cloneDataSet(DataSet dataSet)
     {
         return dataSet.factory().clone(dataSet);
@@ -139,6 +180,18 @@ public class DataFunctions
 		};
 	}
 
+    /**
+     * Implementation of the contains function.
+     * <p>
+     * Find if a data set contains a value for the given key
+     *
+     * @param   data
+     *          the data set to check
+     * @param   key
+     *          the key to the item to be found
+     * @return  {@code true} if an item exists for the key,
+     *          otherwise {@code false}.
+     */
     public static Boolean contains(DataSet data, String key)
     {
         return data != null &&
@@ -193,6 +246,17 @@ public class DataFunctions
 		return functions;
 	}
 
+    /**
+     * Implementation of the join function for arrays.
+     * <p>
+     * Create a {@link DataArray} by joining two arrays together
+     *
+     * @param   first
+     *          the first array
+     * @param   second
+     *          the second array
+     * @return  a new array containing both input arrays.
+     */
     public static DataArray joinArray(DataArray first, DataArray second)
     {
         DataArray joined = first.factory().clone(first);
@@ -203,6 +267,19 @@ public class DataFunctions
         return joined;
     }
 
+    /**
+     * Implementation of the join function for data sets.
+     * <p>
+     * Create a {@link DataSet} by joining two data sets together.
+     * If a key is repeated then the item from {@code second} will replace the
+     * item from {@code first}.
+     *
+     * @param   first
+     *          the first data set
+     * @param   second
+     *          the second data set
+     * @return  a new data set containing both input data sets.
+     */
     public static DataSet joinDataSet(DataSet first, DataSet second)
     {
         DataSet joined = first.factory().clone(first);
@@ -249,9 +326,24 @@ public class DataFunctions
 		};
 	}
 
+    /**
+     * Implementation of the key function.
+     * <p>
+     * Find the key for the item at {@code index} position.
+     * If the index is out of range then returns null
+     * @param   data
+     *          the data set
+     * @param   index
+     *          the position in the data set.
+     * @return  If the index is valid then {@link DataItem#getKey()} for the item,
+     *          otherwise returns {@code null}.
+     */
     public static String key(DataSet data, Integer index)
     {
-        return data != null && index != null ?
+        return data != null &&
+                    index != null &&
+                    index >= 0 &&
+                    index < data.size() ?
                 data.get(index).getKey() :
                 null;
     }
@@ -292,9 +384,31 @@ public class DataFunctions
 		};
 	}
 
-    public static Object remove(DataSet data, String key)
+    /**
+     * Implementation of the remove function.
+     * <p>
+     * Find the key for the item at {@code index} position.
+     * If the index is out of range then returns null
+     * @param   data
+     *          the data set
+     * @param   key
+     *          the position in the data set.
+     * @return  If the index is valid then {@link DataItem#getKey()} for the item,
+     *          otherwise returns {@code null}.
+     */
+    public static Object remove(DataSet data, DataItem item)
     {
-        DataItem removed = data.remove(key);
+        if (data == null || item == null)
+        {
+            return null;
+        }
+
+        DataItem removed = null;
+        switch (item.getType())
+        {
+            case STRING : removed = data.remove(item.getString());
+//            case INTEGER : removed = data.remove(item.getInteger());
+        }
         // return the value's object not the item.
         // expressions NEVER handle DataValue objects.
         return removed != null ?
@@ -304,19 +418,19 @@ public class DataFunctions
 
 	private static FunctionDefinition removeFunction()
 	{
-		return new InternalFunction("remove", "data", "key")
+		return new InternalFunction("remove", "data", "key_index")
 		{
 			@Override
 			public String describe()
 			{
-				return "remove the item for key in the data set, ";
+				return "remove the item for a key or index from the data set";
 			}
 			@Override
 			public Object execute(DataSet arguments)
 			{
                 return DataFunctions.remove(
                         arguments.getDataSet("data"),
-						arguments.getString("key")
+						arguments.get("key_index")
                 );
 			}
 		};
