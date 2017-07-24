@@ -37,8 +37,8 @@ public class TestExpressionParsing
     private Object result;
 
     /**
-     *
-     * @return
+     * The list of expressions to test.
+     * @return th expressions
      */
     public Object[] expressions()
     {
@@ -109,9 +109,11 @@ public class TestExpressionParsing
     }
 
     /**
+     * Set up a test case.
      *
-     * @param arg
-     * @return
+     * @param   arg
+     *          the test case
+     * @return  the result of setting up the test case
      */
     public TestResult setUpTest(Object arg)
     {
@@ -131,6 +133,13 @@ public class TestExpressionParsing
         );
     }
 
+    /**
+     * tear down a test case.
+     *
+     * @param   arg
+     *          the test case
+     * @return  the result of tearing down the test case
+     */
     public TestResult tearDownTest(Object arg)
     {
         this.data = null;
@@ -147,11 +156,15 @@ public class TestExpressionParsing
                 TestResult.isNull(this.result)
         );
     }
+
     /**
+     * Test creating an expression
      *
-     * @param arg
-     * @return
-     * @throws ExpressionException
+     * @param   arg
+     *          the test case
+     * @return  the result of the test
+     * @throws  ExpressionException
+     *          when an error occurs.
      */
     @TestAnnotation(order = 0, setUp = "setUpTest")
     public TestResult create(Object arg) throws ExpressionException
@@ -162,10 +175,13 @@ public class TestExpressionParsing
     }
 
     /**
+     * Test evaluating an expression
      *
-     * @param arg
-     * @return
-     * @throws ExpressionException
+     * @param   arg
+     *          the test case
+     * @return  the result of the test
+     * @throws  ExpressionException
+     *          when an error occurs.
      */
     @TestAnnotation(order = 10)
     public TestResult evaluate(Object arg) throws ExpressionException
@@ -180,9 +196,11 @@ public class TestExpressionParsing
     }
 
     /**
+     * confirm the result of an expression
      *
-     * @param arg
-     * @return
+     * @param   arg
+     *          the test case
+     * @return  the result of the test
      */
     @TestAnnotation(order = 20, tearDown = "tearDownTest")
     public TestResult confirm(Object arg)

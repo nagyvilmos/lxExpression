@@ -80,6 +80,13 @@ public class TestExpressionScript extends TestClass
     private final File testFile;
     private DataSet testData;
     private String[] testList;
+
+    /**
+     * Create a test handler based on an script
+     *
+     * @param   testFile
+     *          the name of the test file.
+     */
     TestExpressionScript(String testFile)
     {
         this.testFile = new File(testFile);
@@ -89,8 +96,9 @@ public class TestExpressionScript extends TestClass
      * Load the test file
      * This just reads in the file, ie the data set containing the test
      * script to perform
-     * @return
-     * @throws java.io.FileNotFoundException
+     * @return  the result of the test
+     * @throws  IOException
+     *          when an exception occurs
      */
     public TestResult loadTestFile()
             throws IOException
@@ -116,11 +124,22 @@ public class TestExpressionScript extends TestClass
         return new TestResult(true);
     }
 
+    /**
+     * The list of tests to be performed
+     *
+     * @return  the list of tests
+     */
     public Object[] testList()
     {
         return this.testList;
     }
 
+    /**
+     * Set up a test
+     * @param   test
+     *          the test to set up
+     * @return  the result of the test
+     */
     public TestResult setUpTest(Object test)
     {
         String testName = (String)test;
