@@ -31,19 +31,22 @@ public class MapDataSet
 	private final ExpressionMap expressionMap;
 
     /**
-     *
-     * @param expressionMap
-     * @param data
+     * Create a map data set.
+     * @param   expressionMap
+     *          the map of expressions for the values
+     * @param   data
+     *          the data behind the expressions
      */
     public MapDataSet(ExpressionMap expressionMap, DataSet data)
 	{
-		super(data);
+		super(data.factory().clone(data));
 		this.expressionMap = expressionMap;
 	}
 
     /**
-     *
-     * @param clone
+     * Create a mapped data set as a clone of another
+     * @param   clone
+     *          the data to clone.
      */
     public MapDataSet(MapDataSet clone)
 	{
@@ -51,6 +54,15 @@ public class MapDataSet
 		this.expressionMap = clone.expressionMap;
 	}
 
+    /**
+     * Get an item from the data set
+     *
+     * <p>If the item already exists then it's current value is used otherwise
+     * if an expression exists, then that is used instead.
+     * @param   key
+     *          the key for the required item.
+     * @return  the item corresponding to the key.
+     */
     @Override
 	public synchronized DataItem get(String key)
 	{
@@ -77,8 +89,8 @@ public class MapDataSet
 
     /**
      * Evaluate all the expressions in the map.
-     * <br>
-     * Go through all the defined fields in the map and return their evaluated
+     *
+     * <p>Go through all the defined fields in the map and return their evaluated
      * values.
      * @return the result of all the evaluations
      */
