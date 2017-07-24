@@ -34,17 +34,17 @@ public class Conditional
 			throws ExpressionException
 	{
 		int start = tokens.getPointer();
-		Value.primary(tokens);
+		Value.value(tokens);
 		Expression left = tokens.expression();
 		if (tokens.getType() == WordType.IF)
 		{
-			Value.primary(tokens.next());
+			Value.value(tokens.next());
 			Expression trueEx = tokens.expression();
 			if (tokens.getType() != WordType.ELSE)
 			{
 				throw new ExpressionException("Expected colon\n" + tokens.getPhrase(start, tokens.getPointer()+2));
 			}
-			Value.primary(tokens.next());
+			Value.value(tokens.next());
 			Expression falseEx = tokens.expression();
 			tokens.setExpression(new Conditional(left, trueEx, falseEx));
 		}
