@@ -1,18 +1,11 @@
-/*
- * ================================================================================
+/*==============================================================================
  * Lexa - Property of William Norman-Walker
- * --------------------------------------------------------------------------------
- * FunctionLibrary.java
- *--------------------------------------------------------------------------------
+ *------------------------------------------------------------------------------
+ * FunctionLibrary.java (lxExpression)
+ *------------------------------------------------------------------------------
  * Author:  William Norman-Walker
  * Created: September 2013
- *--------------------------------------------------------------------------------
- * Change Log
- * Date:        By: Ref:        Description:
- * ---------    --- ----------  --------------------------------------------------
- * 2014.11.17	WNW				Ratioanlise import statements.
- * 2014.11.17	WNW				Make sure all javadoc is upto date.
- *================================================================================
+ *==============================================================================
  */
 package lexa.core.expression.function;
 
@@ -76,9 +69,15 @@ public final class FunctionLibrary
 	}
 
     /**
+     * Create a function library based on the defined functions in the data set
      *
-     * @param functions
-     * @throws ExpressionException
+     * <p>This creates a new library and uses the {@link FunctionLibrary#base() base}
+     * as its parent.
+     *
+     * @param   functions
+     *          a data set containing function definitions.
+     * @throws  ExpressionException
+     *          when an exception occurs parsing the functions
      */
     public FunctionLibrary(DataSet functions)
 			throws ExpressionException
@@ -87,9 +86,12 @@ public final class FunctionLibrary
 	}
 
     /**
+     * Create an empty function library with the given library as a parent
      *
-     * @param parent
-     * @throws ExpressionException
+     * @param   parent
+     *          the parent library.
+     * @throws  ExpressionException
+     *          when an error occurs adding the function
      */
     public FunctionLibrary(FunctionLibrary parent)
 			throws ExpressionException
@@ -98,10 +100,15 @@ public final class FunctionLibrary
 	}
 
     /**
+     * Create a function library based on the defined functions in the data set
+     * with the supplied parent
      *
-     * @param parent
-     * @param functions
-     * @throws ExpressionException
+     * @param   parent
+     *          the parent library.
+     * @param   functions
+     *          a data set containing function definitions.
+     * @throws  ExpressionException
+     *          when an exception occurs parsing the functions
      */
     public FunctionLibrary(FunctionLibrary parent, DataSet functions)
 			throws ExpressionException
@@ -118,41 +125,13 @@ public final class FunctionLibrary
 		this.addFunctions(functions);
 	}
 
-	/* TODO Make maps work:
-	public final void addExpressionMap(ExpressionMap map)
-			throws ExpressionException
-	{
-		this.expressionMaps.put(map.getName(), map);
-		map.parse(this.parser);
-	}
-
-	public final void addExpressionMap(String name, DataSet data)
-			throws ExpressionException
-	{
-		this.addExpressionMap(new ExpressionMap( name, data));
-	}
-	public final void addExpressionMaps(DataSet data)
-			throws ExpressionException
-	{
-		if (data == null)
-		{
-			return; // elegant exit
-		}
-		for (DataItem item
-				: data)
-		{
-			this.addExpressionMap(item.getKey(), item.getDataSet());
-		}
-	}
-	*/
-
     /**
-     *
-     * @param function
-     * @throws ExpressionException
+     * Add a function to the library
+     * @param   function
+     *          function definition to add
+     * @throws  ExpressionException
+     *          when an error occurs adding the function
      */
-
-
 	public final void addFunction(FunctionDefinition function)
 			throws ExpressionException
 	{
@@ -165,21 +144,27 @@ public final class FunctionLibrary
 	}
 
     /**
+     * Add a function to the library
      *
-     * @param name
-     * @param data
+     * @param   name
+     *          the name if the function
+     * @param   data
+     *          the definition, as a data set, for the function.
      * @throws ExpressionException
+     *          when an error occurs adding the function
      */
     public final void addFunction(String name, DataSet data)
 			throws ExpressionException
 	{
-		this.addFunction(new FunctionFromExpression( name, data));
+		this.addFunction(new FunctionFromExpression(name, data));
 	}
 
     /**
-     *
-     * @param data
-     * @throws ExpressionException
+     * Add functions from a data set to the library
+     * @param   data
+     *          the definitions for the functions
+     * @throws  ExpressionException
+     *          when an error occurs adding the function
      */
     public final void addFunctions(DataSet data)
 			throws ExpressionException
@@ -196,10 +181,16 @@ public final class FunctionLibrary
 	}
 
     /**
+     * Get a {@link FunctionDefinition} by its name
      *
-     * @param name
-     * @return
-     * @throws ExpressionException
+     * <p>If the function is defined in this library then it is returned
+     * otherwise the function is requested from the parent
+     * @param   name
+     *          the name of the required function
+     * @return  the defined function.
+     * @throws  ExpressionException
+     *          when the function is not defined, or a {@code null} or empty
+     *          name is supplied.
      */
     public final FunctionDefinition getFunction(String name)
 			throws ExpressionException
@@ -240,8 +231,9 @@ public final class FunctionLibrary
 	}
 
     /**
+     * Get the names of all the functions defined in this library
      *
-     * @return
+     * @return  a list of function names
      */
     public Set<String> functions()
 	{
@@ -249,8 +241,12 @@ public final class FunctionLibrary
 	}
 
     /**
+     * Get the names of all the functions available from this library
      *
-     * @return
+     * <p>This includes all the functions defined in this library and in and in
+     * any parents up to, and including, the base library.
+     *
+     * @return  a list of function names
      */
     public Set<String> allFunctions()
 	{

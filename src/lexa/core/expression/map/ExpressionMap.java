@@ -81,11 +81,14 @@ public class ExpressionMap
 	}
 
     /**
-     *
-     * @param key
-     * @param data
-     * @return
-     * @throws ExpressionException
+     * Evaluate an expression from the map
+     * @param   key
+     *          the name of the expression
+     * @param   data
+     *          the input data for the expression
+     * @return  the result of the expression.
+     * @throws  ExpressionException
+     *          when an error occurs adding the function
      */
     public Object evaluate(String key, MapDataSet data)
 			throws ExpressionException
@@ -95,10 +98,14 @@ public class ExpressionMap
 			Expression expression = this.expressions.get(key);
 			return expression.evaluate(data);
 		}
-		if (key.contains("."))
+        int split = key.indexOf(",");
+		if (split > 1)
 		{
-			// split and search
-			throw new UnsupportedOperationException("lexa.core.expression.map.ExpressionMap.evalute:Object call to child not supported yet.");
+            ExpressionMap child = this.children.get(key.substring(0, split));
+            if (child != null)
+            {
+                return child.evaluate(key.substring(split+1), data);
+            }
 		}
 		return null; // nothing to do
 	}
