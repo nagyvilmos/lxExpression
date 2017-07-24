@@ -43,7 +43,7 @@ public class Function
 				done = true;
 				continue;
 			}
-			Element.element(tokens);
+			Value.value(tokens);
 			args.add(tokens.expression());
 		}
 		if (!done)
