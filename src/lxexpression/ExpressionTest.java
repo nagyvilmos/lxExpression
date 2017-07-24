@@ -45,7 +45,7 @@ public class ExpressionTest {
         System.out.println(
                 new TestRun(tests)
                         .execute()
-                        .getReport(true, true)
+                        .getReport(false, true)
         );
     }
 

@@ -10,7 +10,6 @@
 
 package lxexpression;
 
-import java.util.*;
 import lexa.core.data.ArrayDataArray;
 import lexa.core.data.ArrayDataSet;
 import lexa.core.data.DataSet;
@@ -114,8 +113,8 @@ public class TestFunctionLibrary extends TestClass
                     , "testFunction 5 6", data, 11)
 
        };   // [48]
-        return Arrays.copyOfRange(tests, 10, 14);
-        //return tests;
+        //return Arrays.copyOfRange(tests, 10, 14);
+        return tests;
     }
 
     public TestResult setUpFunctionCall(Object arg)
