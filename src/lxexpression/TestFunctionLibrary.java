@@ -55,7 +55,7 @@ public class TestFunctionLibrary extends TestClass
             new TestCase(null, "key data 1", data, "b"),
             new TestCase(null, "value data 0", data, 1),
             new TestCase(null, "remove data \"b\"", data, 2),
-            new TestCase(null, "remove data 2", data, 2),
+            new TestCase(null, "remove data 0", data, 1),
             new TestCase(null, "map data map", data, null),
             new TestCase(null, "size data", data, 2),
             new TestCase(null, "size array", data, 3),

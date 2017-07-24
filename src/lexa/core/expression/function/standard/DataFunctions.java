@@ -387,14 +387,16 @@ public class DataFunctions
     /**
      * Implementation of the remove function.
      * <p>
-     * Find the key for the item at {@code index} position.
-     * If the index is out of range then returns null
+     * Remove an item from the data set either by key or index. If the input is
+     * a string then it is removed by key and if it is an integer then it is
+     * removed by index.
+     *
      * @param   data
      *          the data set
-     * @param   key
-     *          the position in the data set.
-     * @return  If the index is valid then {@link DataItem#getKey()} for the item,
-     *          otherwise returns {@code null}.
+     * @param   item
+     *          the item in the data set, either a key or index
+     * @return  If the item is removed then {@link DataItem#getObject()} for the
+     *          item, otherwise returns {@code null}.
      */
     public static Object remove(DataSet data, DataItem item)
     {
@@ -406,8 +408,16 @@ public class DataFunctions
         DataItem removed = null;
         switch (item.getType())
         {
-            case STRING : removed = data.remove(item.getString());
-//            case INTEGER : removed = data.remove(item.getInteger());
+            case STRING :
+            {
+                removed = data.remove(item.getString());
+                break;
+            }
+            case INTEGER :
+            {
+                removed = data.remove(item.getInteger());
+                break;
+            }
         }
         // return the value's object not the item.
         // expressions NEVER handle DataValue objects.
