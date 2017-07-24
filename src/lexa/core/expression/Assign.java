@@ -40,7 +40,7 @@ public class Assign extends Expression {
 		{
 			throw new ExpressionException("expected equals for assign\n" + tokens.getPhrase(p, p+2));
 		}
-		Value.primary(tokens.next());
+		Value.value(tokens.next());
 		tokens.setExpression(new Assign(assignTo, tokens.expression()));
 	}
     /** The field name to be assigned */

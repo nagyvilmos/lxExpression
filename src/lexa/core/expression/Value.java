@@ -27,7 +27,7 @@ import lexa.core.data.DataSet;
 public class Value
         extends Expression {
 
-	static void primary(ExpressionTokens tokens) throws ExpressionException
+	static void value(ExpressionTokens tokens) throws ExpressionException
 	{
 		switch (tokens.getType())
 		{
