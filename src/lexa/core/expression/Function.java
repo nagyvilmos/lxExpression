@@ -48,7 +48,9 @@ public class Function
 		}
 		if (!done)
 		{
-			throw new ExpressionException("Missing end of function for " + name + '\n' + tokens.getPhrase(start,start + 2));
+			throw new ExpressionException(
+                    "Missing end of function for " + name + '\n' +
+                            tokens.getPhrase(start,tokens.getPointer() + 1));
 		}
 		tokens.setExpression(new Function(tokens.getLibrary(), name, args));
 		tokens.next();

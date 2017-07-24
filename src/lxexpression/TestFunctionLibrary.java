@@ -142,7 +142,7 @@ public class TestFunctionLibrary extends TestClass
                         "lexa.core.expression.function.FunctionLibrary",
                         testCase.functionLibrary),
                 TestResult.isClass(
-                        "lexa.core.expression.FunctionCall",
+                        "lexa.core.expression.Function",
                         testCase.expression)
         );
     }

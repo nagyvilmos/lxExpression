@@ -34,7 +34,7 @@ public class DataFunctions
         }
         if (array == null)
         {
-            return new ArrayDataArray(values);
+            return DataFunctions.array(values);
         }
         return array.addAll(values);
     }
@@ -52,13 +52,19 @@ public class DataFunctions
 			public Object execute(DataSet arguments)
 			{
                 DataArray array = arguments.getArray("array");
-				Object value = arguments.getString("key");
-				return array.add(value);
+                Object[] values = new Object[arguments.size()-1];
+				for (int i = 1;
+                     i < arguments.size();
+                        i++)
+                {
+                    values[i - 1] = arguments.get(i).getObject();
+                }
+				return DataFunctions.add(array, values);
 			}
 		};
     }
 
-    public static DataArray array(Object[] values)
+    public static DataArray array(Object ... values)
     {
         return new ArrayDataArray(values);
     }
